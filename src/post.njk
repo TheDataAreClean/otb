@@ -1,0 +1,72 @@
+---
+pagination:
+  data: posts
+  size: 1
+  alias: post
+permalink: "/{{ post.slug }}/"
+layout: base.njk
+---
+
+<article class="post">
+
+  <header class="post__header">
+    <div class="post__meta">
+      <span class="badge badge--{{ post.category }}">{{ post.category | categoryIcon | safe }}{{ post.category | categoryLabel }}</span>
+      <time datetime="{{ post.published_date | htmlDateString }}">{{ post.published_date | readableDate }}</time>
+    </div>
+    <h1 class="post__title">{{ post.title }}</h1>
+  </header>
+
+  <div class="post__body">
+    {{ post.body | markdownify | safe }}
+  </div>
+
+  <footer class="post__footer">
+
+    {% set sortedPosts = posts | sortByDate %}
+    {% set currentIndex = 0 %}
+    {% for p in sortedPosts %}{% if p.slug == post.slug %}{% set currentIndex = loop.index0 %}{% endif %}{% endfor %}
+    {% if currentIndex > 0 %}{% set newerPost = sortedPosts[currentIndex - 1] %}{% endif %}
+    {% set olderPost = sortedPosts[currentIndex + 1] %}
+
+    <nav class="post-nav" aria-label="More posts">
+      {% if newerPost %}
+      <a href="/{{ newerPost.slug }}/" class="post-nav__link">
+        <span class="post-nav__dir">← Newer</span>
+        <span class="post-nav__title">{{ newerPost.title }}</span>
+      </a>
+      {% else %}<div></div>{% endif %}
+      {% if olderPost %}
+      <a href="/{{ olderPost.slug }}/" class="post-nav__link post-nav__link--right">
+        <span class="post-nav__dir">Older →</span>
+        <span class="post-nav__title">{{ olderPost.title }}</span>
+      </a>
+      {% else %}<div></div>{% endif %}
+    </nav>
+
+    <div class="category-more">
+      <span class="badge badge--{{ post.category }}">{{ post.category | categoryIcon | safe }}{{ post.category | categoryLabel }}</span>
+      <a href="/category/{{ post.category }}/" class="category-more__link">{{ post.category | categoryBrowse }} →</a>
+    </div>
+
+    <div class="newsletter-block">
+      <h2 class="newsletter-block__heading">Stay in the loop</h2>
+      <p class="newsletter-block__desc">New posts, occasional thoughts. No frequency promises.</p>
+      <form class="newsletter-form" action="/api/subscribe" method="post">
+        <label for="email-{{ post.slug }}" class="sr-only">Email address</label>
+        <input
+          type="email"
+          id="email-{{ post.slug }}"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="newsletter-form__input"
+          autocomplete="email"
+        >
+        <button type="submit" class="newsletter-form__btn">Subscribe</button>
+      </form>
+    </div>
+
+  </footer>
+
+</article>

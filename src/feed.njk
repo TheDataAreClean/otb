@@ -1,0 +1,32 @@
+---
+layout: false
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.description }}</subtitle>
+  <link href="{{ metadata.url }}/feed.xml" rel="self"/>
+  <link href="{{ metadata.url }}/"/>
+  <id>{{ metadata.url }}/</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+  </author>
+  {% set sorted = posts | sortByDate %}
+  {% if sorted.length %}
+  <updated>{{ sorted[0].published_date | toDate | dateToRfc3339 }}</updated>
+  {% endif %}
+  {% for post in sorted %}
+  <entry>
+    <title>{{ post.title | escape }}</title>
+    <link href="{{ metadata.url }}/{{ post.slug }}/"/>
+    <id>{{ metadata.url }}/{{ post.slug }}/</id>
+    <published>{{ post.published_date | toDate | dateToRfc3339 }}</published>
+    <updated>{{ post.published_date | toDate | dateToRfc3339 }}</updated>
+    <summary>{{ post.excerpt | escape }}</summary>
+    <content type="html"><![CDATA[{{ post.body | markdownify | htmlToAbsoluteUrls(metadata.url) }}]]></content>
+    <category term="{{ post.category }}"/>
+  </entry>
+  {% endfor %}
+</feed>

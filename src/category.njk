@@ -1,0 +1,43 @@
+---
+pagination:
+  data: categories
+  size: 1
+  alias: category
+permalink: "/category/{{ category.slug }}/"
+layout: base.njk
+---
+
+<section class="home">
+
+  <nav class="filter-nav" aria-label="Filter by category">
+    <a href="/" class="filter-link">All</a>
+    {% for cat in categories %}
+    <a
+      href="/category/{{ cat.slug }}/"
+      class="filter-link{% if cat.slug == category.slug %} filter-link--active{% endif %}"
+      title="{{ cat.description }}"
+    >{{ cat.name }}</a>
+    {% endfor %}
+  </nav>
+
+  <p class="category-heading">{{ category.name }}</p>
+
+  <ol class="post-list" reversed>
+    {% set filtered = posts | filterByCategory(category.slug) | sortByDate %}
+    {% for post in filtered %}
+    <li class="post-list__item">
+      <a href="/{{ post.slug }}/" class="post-list__link">
+        <span class="post-list__title">{{ post.title }}</span>
+      </a>
+      <div class="post-list__meta">
+        <span class="badge badge--{{ post.category }}">{{ post.category | categoryIcon | safe }}{{ post.category | categoryLabel }}</span>
+        <time datetime="{{ post.published_date | htmlDateString }}">{{ post.published_date | readableDate }}</time>
+      </div>
+      {% if post.excerpt %}<p class="post-list__excerpt">{{ post.excerpt }}</p>{% endif %}
+    </li>
+    {% else %}
+    <li class="post-list__empty">No posts in this category yet.</li>
+    {% endfor %}
+  </ol>
+
+</section>

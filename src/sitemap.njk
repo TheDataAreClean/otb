@@ -1,0 +1,28 @@
+---
+layout: false
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ metadata.url }}/</loc>
+  </url>
+  <url>
+    <loc>{{ metadata.url }}/about/</loc>
+  </url>
+  <url>
+    <loc>{{ metadata.url }}/newsletter/</loc>
+  </url>
+  {% for cat in categories %}
+  <url>
+    <loc>{{ metadata.url }}/category/{{ cat.slug }}/</loc>
+  </url>
+  {% endfor %}
+  {% for post in posts | sortByDate %}
+  <url>
+    <loc>{{ metadata.url }}/{{ post.slug }}/</loc>
+    <lastmod>{{ post.published_date | htmlDateString }}</lastmod>
+  </url>
+  {% endfor %}
+</urlset>

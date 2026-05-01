@@ -1,0 +1,76 @@
+---
+layout: base.njk
+title: About
+permalink: /about/
+---
+
+<article class="page">
+  <h1 class="page__title">About</h1>
+  <div class="page__body">
+    <p><em>Outside the Boxplot</em> is a digital garden for thinking out loud about data communication.</p>
+
+    <p>I work at the intersection of data and storytelling — helping people understand what numbers mean, why it matters, and how to make that meaning legible to others. That means a lot of time thinking about charts, words, structure, and the gap between insight and communication.</p>
+
+    <p>This site is where I work through those thoughts. The categories signal what kind of thinking each post represents:</p>
+  </div>
+
+  <figure class="anatomy-figure" aria-label="Box plot anatomy showing the four post types">
+    <svg viewBox="0 0 520 230" width="100%" role="img" aria-hidden="true">
+      <defs>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(42)">
+          <line x1="0" y1="0" x2="0" y2="5" stroke="#4a7c59" stroke-width="0.8" opacity="0.4"/>
+        </pattern>
+      </defs>
+
+      <!-- Callout lines — each with a distinct curve -->
+      <path d="M 240,44 C 232,62 234,76 240,89"    fill="none" stroke="#c8d8c4" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round"/>
+      <path d="M 460,44 C 472,72 471,90 460,112"   fill="none" stroke="#c8d8c4" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round"/>
+      <path d="M 200,152 C 191,161 192,179 200,188" fill="none" stroke="#c8d8c4" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round"/>
+      <path d="M 375,120 C 385,143 367,166 375,188" fill="none" stroke="#c8d8c4" stroke-width="1" stroke-dasharray="3 3" stroke-linecap="round"/>
+
+      <!-- Box plot — gentle curves for a hand-drawn feel -->
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <!-- Box: each edge has a subtle bow -->
+        <path d="M 151,92 C 210,89 272,91 329,90 L 330,150 C 270,152 208,150 150,151 Z"
+              fill="url(#hatch)" stroke="#3d6b4a" stroke-width="2"/>
+        <!-- Median line — very slight lean -->
+        <path d="M 239,90 C 241,110 239,132 241,150"
+              fill="none" stroke="#3d6b4a" stroke-width="2.5"/>
+        <!-- Left whisker — slight droop -->
+        <path d="M 62,119 C 90,121 122,119 151,120"
+              fill="none" stroke="#3d6b4a" stroke-width="2"/>
+        <!-- Left cap — slight tilt -->
+        <path d="M 61,107 C 63,117 61,124 63,133"
+              fill="none" stroke="#3d6b4a" stroke-width="2"/>
+        <!-- Right whisker — slight rise -->
+        <path d="M 330,120 C 358,118 390,121 414,119"
+              fill="none" stroke="#3d6b4a" stroke-width="2"/>
+        <!-- Right cap — slight tilt other way -->
+        <path d="M 415,107 C 413,117 415,124 413,133"
+              fill="none" stroke="#3d6b4a" stroke-width="2"/>
+        <!-- Outlier — hand-drawn circle -->
+        <path d="M 461,113 C 465,112 468,116 467,120 C 467,124 464,128 460,127 C 456,127 452,124 453,120 C 452,116 456,113 461,113"
+              fill="none" stroke="#3d6b4a" stroke-width="2"/>
+      </g>
+
+      <!-- Labels -->
+      <text x="240" y="18" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="11" font-weight="500" fill="#1a1a18" letter-spacing="0.05em">MEDIAN</text>
+      <text x="240" y="33" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="10" fill="#666660">Finished essays</text>
+
+      <text x="460" y="18" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="11" font-weight="500" fill="#1a1a18" letter-spacing="0.05em">OUTLIER</text>
+      <text x="460" y="33" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="10" fill="#666660">Rough ideas</text>
+
+      <text x="200" y="202" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="11" font-weight="500" fill="#1a1a18" letter-spacing="0.05em">BOX</text>
+      <text x="200" y="218" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="10" fill="#666660">Dense analysis</text>
+
+      <text x="375" y="202" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="11" font-weight="500" fill="#1a1a18" letter-spacing="0.05em">WHISKER</text>
+      <text x="375" y="218" text-anchor="middle" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="10" fill="#666660">Recommendations</text>
+
+    </svg>
+  </figure>
+
+  <div class="page__body">
+    <p>No comments, no analytics I'll ever check, no strategy. Just a place to think.</p>
+  </div>
+
+</article>

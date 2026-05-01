@@ -1,0 +1,24 @@
+---
+permalink: /og-image.svg
+eleventyExcludeFromCollections: true
+---
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <style><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400&family=IBM+Plex+Sans:wght@400&display=swap');
+    ]]></style>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="24" y2="0" stroke="rgba(184,216,176,0.32)" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0"  y2="24" stroke="rgba(184,216,176,0.32)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#fafaf8"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#4a7c59"/>
+  {% set markCircleFill = "#d0e8c8" %}
+  <g transform="translate(442,155) scale(7)" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    {% include "mark-paths.njk" %}
+  </g>
+  <text x="600" y="392" font-family="'IBM Plex Serif', Georgia, serif" font-size="68" fill="#1a1a18" text-anchor="middle" letter-spacing="-1">Outside the Boxplot</text>
+  <text x="600" y="452" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="26" fill="#666660" text-anchor="middle">A digital garden for data communicators</text>
+</svg>

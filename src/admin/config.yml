@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: TheDataAreClean/otb
+  branch: main
+  base_url: https://sveltia-cms-auth.thedataareclean.workers.dev
+
+media_folder: src/images
+public_folder: /images
+
+collections:
+  - name: posts
+    label: Posts
+    folder: src/posts
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Median, value: median }
+          - { label: Box, value: box }
+          - { label: Whisker, value: whisker }
+          - { label: Outlier, value: outlier }
+      - { label: Published Date, name: published_date, widget: date, format: YYYY-MM-DD, date_format: YYYY-MM-DD }
+      - { label: Body, name: body, widget: markdown }
