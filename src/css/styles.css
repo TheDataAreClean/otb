@@ -10,6 +10,7 @@
   --color-surface:       #ffffff;
   --color-border:        #e4e4e0;
   --color-border-subtle: #eeeeeb;
+  --color-divider:       #d8d8d4;
 
   /* — Colour: text — */
   --color-text:          #1a1a18;   /* ~18:1 on bg  — AAA */
@@ -148,6 +149,10 @@ a {
   width: 100%;
   height: 10px;
   overflow: visible;
+}
+
+.divider path {
+  stroke: var(--color-divider);
 }
 
 .site-header .divider {
@@ -590,9 +595,24 @@ a {
   background: var(--color-accent-dark);
 }
 
+.newsletter-form__btn:active {
+  background: var(--color-accent-dark);
+  transform: translateY(1px);
+}
+
 .newsletter-form__btn:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+.newsletter-form__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.newsletter-form__input:focus:invalid {
+  outline-color: #c0392b;
+  border-color: #c0392b;
 }
 
 /* === Box plot anatomy diagram ============================= */

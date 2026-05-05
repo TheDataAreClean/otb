@@ -16,14 +16,23 @@ function parseFrontmatter(raw) {
   return { data, body: match[2].trim() };
 }
 
+function getAllMdFiles(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...getAllMdFiles(full));
+    else if (entry.name.endsWith('.md')) files.push(full);
+  }
+  return files;
+}
+
 module.exports = function () {
   if (!fs.existsSync(POSTS_DIR)) return [];
 
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith('.md'))
+  return getAllMdFiles(POSTS_DIR)
     .map((file) => {
-      const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf8');
+      const raw = fs.readFileSync(file, 'utf8');
       const { data, body } = parseFrontmatter(raw);
       return {
         title: data.title || '',

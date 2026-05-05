@@ -52,7 +52,8 @@ layout: base.njk
     <div class="newsletter-block">
       <h2 class="newsletter-block__heading">{{ metadata.newsletterHeading }}</h2>
       <p class="newsletter-block__desc">{{ metadata.newsletterDesc }}</p>
-      <form class="newsletter-form" action="/api/subscribe" method="post">
+      {# TODO: replace USERNAME with your Buttondown username to activate #}
+      <form class="newsletter-form" action="https://buttondown.com/api/emails/embed-subscribe/USERNAME" method="post" target="popupwindow">
         <label for="email-{{ post.slug }}" class="sr-only">Email address</label>
         <input
           type="email"

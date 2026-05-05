@@ -38,8 +38,8 @@ Without it, their output gets wrapped in the base HTML layout. Always confirm th
 **`src/_data/posts.js` reads from disk — no API**
 Posts are read from `src/posts/*.md` at build time. There is no external CMS API. Content changes require a git commit (directly or via Sveltia) to trigger a new deploy.
 
-**Newsletter form is currently non-functional**
-The subscribe form POSTs to `/api/subscribe` which does not resolve on GitHub Pages (the Netlify function was removed). Do not add logic that depends on this endpoint. Replace with a Buttondown embed when wiring up the newsletter.
+**Newsletter form uses a Buttondown placeholder**
+Both forms (`post.njk` and `newsletter-form.njk`) point to `https://buttondown.com/api/emails/embed-subscribe/USERNAME`. Replace `USERNAME` with your Buttondown username to activate. Do not change the form structure — just update the action URL.
 
 **`postbuild` regenerates the OG image on every build**
 `scripts/generate-images.js` runs after every build via the `postbuild` npm hook. It reads `src/og-image.svg` and writes `src/og-image.png`. This is intentional. Do not suppress or skip it.
