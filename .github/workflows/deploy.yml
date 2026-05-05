@@ -26,7 +26,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      - run: npx playwright install chromium --with-deps
       - run: npm run build
+        env:
+          URL: https://otb.thedataareclean.com
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site

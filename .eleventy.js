@@ -1,7 +1,11 @@
 require('dotenv').config();
 
+const fs = require('fs');
+const path = require('path');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 const markdownIt = require('markdown-it');
+const categoriesData = require('./src/_data/categories.js');
+const categoryMap = Object.fromEntries(categoriesData.map((c) => [c.slug, c]));
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -24,25 +28,9 @@ module.exports = function (eleventyConfig) {
     new Date(dateStr).toISOString().split('T')[0]
   );
 
-  eleventyConfig.addFilter('categoryLabel', (cat) => {
-    const labels = {
-      median: 'Median',
-      box: 'Box',
-      whisker: 'Whisker',
-      outlier: 'Outlier',
-    };
-    return labels[cat] || cat;
-  });
+  eleventyConfig.addFilter('categoryLabel', (cat) => categoryMap[cat]?.name || cat);
 
-  eleventyConfig.addFilter('categoryBrowse', (cat) => {
-    const browse = {
-      median:  'More finished essays',
-      box:     'More dense analysis',
-      whisker: 'More recommendations',
-      outlier: 'More rough ideas',
-    };
-    return browse[cat] || `More ${cat} posts`;
-  });
+  eleventyConfig.addFilter('categoryBrowse', (cat) => categoryMap[cat]?.browse || `More ${cat} posts`);
 
   eleventyConfig.addFilter('toDate', (str) => new Date(str));
 
@@ -64,10 +52,16 @@ module.exports = function (eleventyConfig) {
   };
   eleventyConfig.addFilter('categoryIcon', (cat) => ICONS[cat] || '');
 
+  eleventyConfig.addFilter('svgContents', (relPath) =>
+    fs.readFileSync(path.join(__dirname, 'src', relPath), 'utf8')
+  );
+
   eleventyConfig.addPassthroughCopy('src/css');
   eleventyConfig.addPassthroughCopy('src/admin');
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy('src/*.png');
+  eleventyConfig.addPassthroughCopy('src/*.svg');
+  eleventyConfig.addPassthroughCopy('src/*.ico');
   eleventyConfig.addPassthroughCopy('src/*.webmanifest');
   eleventyConfig.addPassthroughCopy('src/CNAME');
 

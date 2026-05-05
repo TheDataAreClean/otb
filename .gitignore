@@ -3,5 +3,4 @@ _site/
 .env
 .DS_Store
 
-# Generated at build time into _site/ by scripts/generate-images.js
-# logo.png is committed to src/ — regenerate manually if the mark changes
+# OG image is generated into _site/images/ at build time — not committed

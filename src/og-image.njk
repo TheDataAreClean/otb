@@ -1,24 +1,39 @@
 ---
-permalink: /og-image.svg
+permalink: /images/og-image.svg
 eleventyExcludeFromCollections: true
 ---
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
-    <style><![CDATA[
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400&family=IBM+Plex+Sans:wght@400&display=swap');
-    ]]></style>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="24" y2="0" stroke="rgba(184,216,176,0.32)" stroke-width="1"/>
       <line x1="0" y1="0" x2="0"  y2="24" stroke="rgba(184,216,176,0.32)" stroke-width="1"/>
     </pattern>
   </defs>
+
   <rect width="1200" height="630" fill="#fafaf8"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect x="0" y="0" width="1200" height="6" fill="#4a7c59"/>
-  {% set markCircleFill = "#d0e8c8" %}
-  <g transform="translate(442,155) scale(7)" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    {% include "mark-paths.njk" %}
+
+  <!-- logo: scale 4, visual centre at (100+, 231) — nested SVG mirrors logo.svg exactly -->
+  <g color="#4a7c59">
+    <svg x="100" y="190" width="276" height="88" viewBox="-2 0 69 22">
+      <g stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 2,5 C 2.4,9 1.6,14 2,17"/>
+        <path d="M 2,11 C 4,10.5 7,11.5 9,11"/>
+        <path d="M 9,3 C 13,2.5 19,3.5 23,3 C 23.5,9 23,14 23,19 C 19,19.5 13,18.5 9,19 C 8.5,14 9,8 9,3 Z"/>
+        <path d="M 16,3 C 16.3,8 15.7,13 16,19"/>
+        <path d="M 23,11 C 25,11.5 28,10.5 30,11"/>
+        <path d="M 30,5 C 29.6,9 30.4,14 30,17"/>
+        <path d="M 40,8 C 42,8 43,10 43,12 C 43,14 42,16 39,16 C 37,16 35,14 35,12 C 35,10 37,8 40,8" fill="#d0e8c8"/>
+      </g>
+      <text x="46" y="16" font-family="'IBM Plex Sans',system-ui,sans-serif" font-size="15" font-weight="500" fill="currentColor" letter-spacing="1">tb</text>
+    </svg>
   </g>
-  <text x="600" y="392" font-family="'IBM Plex Serif', Georgia, serif" font-size="68" fill="#1a1a18" text-anchor="middle" letter-spacing="-1">Outside the Boxplot</text>
-  <text x="600" y="452" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="26" fill="#666660" text-anchor="middle">A digital garden for data communicators</text>
+
+  <!-- rule — clean, 20 px breathing room above and below -->
+  <line x1="100" y1="295" x2="560" y2="295" stroke="#8aaa96" stroke-width="1" stroke-linecap="butt"/>
+
+  <!-- title and subtitle -->
+  <text x="100" y="365" font-family="'IBM Plex Serif', Georgia, serif" font-size="68" fill="#1a1a18" text-anchor="start" letter-spacing="-1">Outside the Boxplot</text>
+  <text x="100" y="421" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="26" fill="#666660" text-anchor="start">A digital garden for data communicators</text>
 </svg>

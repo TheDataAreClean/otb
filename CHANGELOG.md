@@ -6,7 +6,14 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
-—
+- feat: SVG logo system — `logo.svg`, `logo-mark.svg`; all icons generated at build time via Playwright (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`)
+- feat: OG image redesigned — left-aligned layout with logo, rule, title, subtitle
+- feat: anatomy diagram saved as `images/anatomy-figure.svg` + `.png`; served via `<picture>` on about page
+- feat: post permalinks changed to `/posts/{category}/{slug}/`
+- feat: `about.md` and `newsletter.md` replace `.njk` page files
+- infra: `generate-images.js` fully rewritten — Playwright for all raster output, resvg removed
+- infra: `deploy.yml` — Playwright browser install + production `URL` env var added
+- infra: `svgContents` filter for inlining SVG files in templates
 
 ---
 

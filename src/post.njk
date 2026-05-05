@@ -3,7 +3,7 @@ pagination:
   data: posts
   size: 1
   alias: post
-permalink: "/{{ post.slug }}/"
+permalink: "/posts/{{ post.category }}/{{ post.slug }}/"
 layout: base.njk
 ---
 
@@ -50,8 +50,8 @@ layout: base.njk
     </div>
 
     <div class="newsletter-block">
-      <h2 class="newsletter-block__heading">Stay in the loop</h2>
-      <p class="newsletter-block__desc">New posts, occasional thoughts. No frequency promises.</p>
+      <h2 class="newsletter-block__heading">{{ metadata.newsletterHeading }}</h2>
+      <p class="newsletter-block__desc">{{ metadata.newsletterDesc }}</p>
       <form class="newsletter-form" action="/api/subscribe" method="post">
         <label for="email-{{ post.slug }}" class="sr-only">Email address</label>
         <input

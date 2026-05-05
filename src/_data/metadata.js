@@ -6,4 +6,7 @@ module.exports = {
   url: process.env.URL || 'http://localhost:8080',
   author: { name: 'Outside the Boxplot' },
   feedPath: '/feed.xml',
+  copyright: '© Outside the Boxplot',
+  newsletterHeading: 'Stay in the loop',
+  newsletterDesc: 'New posts, occasional thoughts. No frequency promises.',
 };

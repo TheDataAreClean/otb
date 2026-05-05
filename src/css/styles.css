@@ -178,9 +178,16 @@ a {
   color: var(--color-accent-dark);
 }
 
+
 .nav__glyph {
   display: block;
   flex-shrink: 0;
+}
+
+.nav__glyph svg {
+  display: block;
+  height: 22px;
+  width: auto;
 }
 
 .nav__links {
