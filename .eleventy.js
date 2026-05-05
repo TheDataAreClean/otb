@@ -52,6 +52,8 @@ module.exports = function (eleventyConfig) {
   };
   eleventyConfig.addFilter('categoryIcon', (cat) => ICONS[cat] || '');
 
+  eleventyConfig.addFilter('postUrl', (post) => `/posts/${post.category}/${post.slug}/`);
+
   eleventyConfig.addFilter('svgContents', (relPath) =>
     fs.readFileSync(path.join(__dirname, 'src', relPath), 'utf8')
   );

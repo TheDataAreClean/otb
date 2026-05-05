@@ -31,13 +31,13 @@ layout: base.njk
 
     <nav class="post-nav" aria-label="More posts">
       {% if newerPost %}
-      <a href="/{{ newerPost.slug }}/" class="post-nav__link">
+      <a href="{{ newerPost | postUrl }}" class="post-nav__link">
         <span class="post-nav__dir">← Newer</span>
         <span class="post-nav__title">{{ newerPost.title }}</span>
       </a>
       {% else %}<div></div>{% endif %}
       {% if olderPost %}
-      <a href="/{{ olderPost.slug }}/" class="post-nav__link post-nav__link--right">
+      <a href="{{ olderPost | postUrl }}" class="post-nav__link post-nav__link--right">
         <span class="post-nav__dir">Older →</span>
         <span class="post-nav__title">{{ olderPost.title }}</span>
       </a>

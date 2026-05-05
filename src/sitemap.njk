@@ -21,7 +21,7 @@ eleventyExcludeFromCollections: true
   {% endfor %}
   {% for post in posts | sortByDate %}
   <url>
-    <loc>{{ metadata.url }}/{{ post.slug }}/</loc>
+    <loc>{{ metadata.url }}{{ post | postUrl }}</loc>
     <lastmod>{{ post.published_date | htmlDateString }}</lastmod>
   </url>
   {% endfor %}

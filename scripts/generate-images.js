@@ -85,7 +85,8 @@ async function renderIcon(browser, svgPath, pngPath, size, { padding = 0.15, bg 
 
   await browser.close();
 
-  execSync(`magick ${path.join(SRC, 'favicon-16.png')} ${path.join(SRC, 'favicon-32.png')} ${path.join(SRC, 'favicon.ico')}`);
+  const im = (() => { try { execSync('which magick', {stdio:'pipe'}); return 'magick'; } catch { return 'convert'; } })();
+  execSync(`${im} ${path.join(SRC, 'favicon-16.png')} ${path.join(SRC, 'favicon-32.png')} ${path.join(SRC, 'favicon.ico')}`);
   fs.unlinkSync(path.join(SRC, 'favicon-16.png'));
   fs.unlinkSync(path.join(SRC, 'favicon-32.png'));
   console.log('  generated favicon.ico');

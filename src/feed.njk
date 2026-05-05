@@ -20,8 +20,8 @@ eleventyExcludeFromCollections: true
   {% for post in sorted %}
   <entry>
     <title>{{ post.title | escape }}</title>
-    <link href="{{ metadata.url }}/{{ post.slug }}/"/>
-    <id>{{ metadata.url }}/{{ post.slug }}/</id>
+    <link href="{{ metadata.url }}{{ post | postUrl }}"/>
+    <id>{{ metadata.url }}{{ post | postUrl }}</id>
     <published>{{ post.published_date | toDate | dateToRfc3339 }}</published>
     <updated>{{ post.published_date | toDate | dateToRfc3339 }}</updated>
     <summary>{{ post.excerpt | escape }}</summary>

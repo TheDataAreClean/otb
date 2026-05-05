@@ -34,7 +34,7 @@ No build tools, no bundler. Eleventy reads markdown posts and Nunjucks templates
 
 ## Content model
 
-Posts live in `src/posts/*.md`. The filename becomes the URL slug (`my-post.md` → `/my-post/`).
+Posts live in `src/posts/*.md`. The filename becomes the URL slug. Post URLs follow the pattern `/posts/{category}/{slug}/` — defined in `post.njk` and centralised via the `postUrl` Eleventy filter. Use `{{ post | postUrl }}` in all templates rather than constructing the path manually.
 
 **Front matter:**
 ```yaml

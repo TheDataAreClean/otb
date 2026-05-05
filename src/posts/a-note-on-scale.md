@@ -1,5 +1,6 @@
 ---
 title: A Note on Scale
+excerpt: Neither truncating nor zeroing the y-axis is an absolute rule — context determines which distortion is worse.
 category: outlier
 published_date: 2026-04-08
 ---
