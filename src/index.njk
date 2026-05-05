@@ -23,6 +23,11 @@ permalink: /
         <time datetime="{{ post.published_date | htmlDateString }}">{{ post.published_date | readableDate }}</time>
       </div>
       {% if post.excerpt %}<p class="post-list__excerpt">{{ post.excerpt }}</p>{% endif %}
+      {% if not loop.last %}
+      <svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true">
+        <path d="{{ loop.index0 | postDivider }}" fill="none" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      {% endif %}
     </li>
     {% endfor %}
   </ol>

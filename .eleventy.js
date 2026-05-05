@@ -54,6 +54,15 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter('postUrl', (post) => `/posts/${post.category}/${post.slug}/`);
 
+  const DIVIDERS = [
+    'M 0,4 C 90,2 230,6 390,3 C 510,2 610,5 680,4',
+    'M 0,5 C 110,3 250,7 390,4 C 500,2 605,6 680,5',
+    'M 0,4 C 85,6 210,2 360,5 C 475,3 585,6 680,4',
+    'M 0,5 C 130,3 270,7 410,4 C 515,3 600,6 680,5',
+    'M 0,4 C 100,3 220,5 400,4 C 500,3 605,5 680,4',
+  ];
+  eleventyConfig.addFilter('postDivider', (i) => DIVIDERS[i % DIVIDERS.length]);
+
   eleventyConfig.addFilter('svgContents', (relPath) =>
     fs.readFileSync(path.join(__dirname, 'src', relPath), 'utf8')
   );
