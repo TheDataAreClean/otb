@@ -30,6 +30,7 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - refactor: consolidated three copies of `p:last-child { margin-bottom: 0; }` (blockquote, callout, margin-note) into one grouped rule; consolidated `markdownify`/`callout`/`marginnote`'s duplicated `md.render()` calls into one `renderMarkdown` helper; removed now-dead `.sr-only` (only user was the removed newsletter form)
 - fix: `.margin-note`'s wide-screen layout used a magic `-200px` offset unrelated to any token — reworked into non-overlapping narrow/wide rules driven by new `--margin-note-width`/`--margin-note-gap` tokens; breakpoint stays 1100px (verified: 230px gutter available there vs. 184px needed)
 - fix: `favicon.svg` used `stroke="currentColor"`, which only resolves correctly when inlined into HTML with a CSS color cascade (as `logo.svg`/`logo-mark.svg` are) — loaded standalone via `<link rel="icon">` it fell back to black; hardcoded to `#4a7c59`
+- fix: `deploy.yml` never installed ImageMagick — `generate-images.js`'s `magick`/`convert` auto-detect (added in an earlier fix) silently fell back to a binary that also doesn't exist on `ubuntu-latest`, failing every deploy at the `favicon.ico` step. Present locally on this machine the whole time, which is why it went unnoticed. Added an explicit `apt-get install imagemagick` step
 
 ---
 
