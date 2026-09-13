@@ -6,6 +6,10 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
+---
+
+## 2026-09-13 (v1.2.0)
+
 - fix: Sveltia CMS admin never rendered (blank page) — `admin/index.html` pointed at the old unscoped `sveltia-cms` npm package, which no longer exists (renamed to `@sveltia/cms`); also loaded the ESM build with `type="module"`, but the package's own docs specify the plain, non-module `dist/sveltia-cms.js`. Fixed and pinned to `@sveltia/cms@0.211.2`
 - fix: once the CMS loaded, it rejected `config.yml` — `published_date`'s `widget: date` is deprecated/unsupported in Sveltia CMS. Changed to `widget: datetime, type: date` (outputs the same plain `YYYY-MM-DD`)
 - feat: branded the CMS admin — `app_title: Outside the Boxplot Admin` replaces "Sveltia CMS" on the login screen and browser tab; `logo.src` set to `/favicon.svg` (the hardcoded-color one, not `logo-mark.svg`'s `currentColor` version, since Sveltia loads it standalone) — appears on the login page, admin header, and browser tab favicon while in the admin
