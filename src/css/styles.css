@@ -439,6 +439,10 @@ a {
   font-style: italic;
 }
 
+.post__body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 .post__body a {
   color: var(--color-accent);
 }

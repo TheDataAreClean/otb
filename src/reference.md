@@ -17,7 +17,7 @@ This page exists to show every formatting element this site's markdown setup can
 
 ## Inline text
 
-Running prose can include **bold text** for emphasis, *italic text* for titles and stress, and ~~strikethrough~~ for corrections or retractions. These can combine: **_bold italic_** works.
+Running prose can include **bold text** for emphasis, *italic text* for titles and stress, and ~~strikethrough~~ for corrections or retractions. These can combine: **_bold italic_** works, as does *~~struck italic~~*.
 
 Inline `code` renders in a monospace font with a faint background. It is for short technical terms, variable names, filenames — things that need to be distinguished from prose.
 
@@ -52,6 +52,7 @@ An unordered list:
 - A third item, closing the set
     - A nested item, indented one level
     - Another nested item at the same level
+        - Nested two levels deep, which is usually too deep
 
 An ordered list:
 

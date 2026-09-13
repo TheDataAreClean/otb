@@ -24,6 +24,7 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - feat: custom heading IDs/classes/data-attrs via `markdown-it-attrs`
 - feat: `{% callout %}` and `{% marginnote %}` paired shortcodes — note/warning callouts with tinted backgrounds; margin notes that float left of content at ≥1100px and sit inline below that
 - style: `--color-code-bg` and `--color-code-inline` now both alias `--color-accent-pale` instead of separate greys
+- fix: `.post__body blockquote`'s child `<p>` kept its default bottom margin, which doesn't collapse through the blockquote's own padding — left a large gap after quoted text; zeroed on `:last-child`
 
 ---
 
