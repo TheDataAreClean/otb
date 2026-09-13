@@ -10,6 +10,8 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## 2026-09-13 (v1.2.0)
 
+Fixes the Sveltia CMS admin interface, which was completely broken (blank page, then a rejected config) after an upstream package rename — and adds custom branding to it.
+
 - fix: Sveltia CMS admin never rendered (blank page) — `admin/index.html` pointed at the old unscoped `sveltia-cms` npm package, which no longer exists (renamed to `@sveltia/cms`); also loaded the ESM build with `type="module"`, but the package's own docs specify the plain, non-module `dist/sveltia-cms.js`. Fixed and pinned to `@sveltia/cms@0.211.2`
 - fix: once the CMS loaded, it rejected `config.yml` — `published_date`'s `widget: date` is deprecated/unsupported in Sveltia CMS. Changed to `widget: datetime, type: date` (outputs the same plain `YYYY-MM-DD`)
 - feat: branded the CMS admin — `app_title: Outside the Boxplot Admin` replaces "Sveltia CMS" on the login screen and browser tab; `logo.src` set to `/favicon.svg` (the hardcoded-color one, not `logo-mark.svg`'s `currentColor` version, since Sveltia loads it standalone) — appears on the login page, admin header, and browser tab favicon while in the admin
@@ -17,6 +19,8 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 ---
 
 ## 2026-09-13 (v1.1.0)
+
+Two new internal reference pages (`/style/`, `/reference/`) documenting the design system and markdown capabilities, expanded markdown support (footnotes, callouts, margin notes, custom heading IDs), a full content reset to start fresh, and a batch of styling and CI fixes.
 
 - feat: SVG logo system — `logo.svg`, `logo-mark.svg`; all icons generated at build time via Playwright (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`)
 - feat: OG image redesigned — left-aligned layout with logo, rule, title, subtitle
@@ -47,6 +51,8 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 ---
 
 ## 2026-05-01 (v1.0.0)
+
+Initial launch of Outside the Boxplot: a static Eleventy site with four post categories, an Atom feed and sitemap, a Git-based Sveltia CMS, and GitHub Pages deployment on a custom domain.
 
 - feat: initial site — Eleventy 3.x, Nunjucks templates, single-file CSS, four category types
 - feat: post list with category filter nav on homepage
