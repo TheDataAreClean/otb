@@ -6,6 +6,9 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
+- fix: Sveltia CMS admin never rendered (blank page) — `admin/index.html` pointed at the old unscoped `sveltia-cms` npm package, which no longer exists (renamed to `@sveltia/cms`); also loaded the ESM build with `type="module"`, but the package's own docs specify the plain, non-module `dist/sveltia-cms.js`. Fixed and pinned to `@sveltia/cms@0.211.2`
+- fix: once the CMS loaded, it rejected `config.yml` — `published_date`'s `widget: date` is deprecated/unsupported in Sveltia CMS. Changed to `widget: datetime, type: date` (outputs the same plain `YYYY-MM-DD`)
+
 ---
 
 ## 2026-09-13 (v1.1.0)

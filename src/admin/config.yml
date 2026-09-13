@@ -26,5 +26,5 @@ collections:
           - { label: Box, value: box }
           - { label: Whisker, value: whisker }
           - { label: Outlier, value: outlier }
-      - { label: Published Date, name: published_date, widget: date, format: YYYY-MM-DD, date_format: YYYY-MM-DD }
+      - { label: Published Date, name: published_date, widget: datetime, type: date }
       - { label: Body, name: body, widget: markdown }
