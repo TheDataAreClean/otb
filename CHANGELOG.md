@@ -17,8 +17,9 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - chore: removed newsletter signup (page, forms, nav link, CSS) — Buttondown was never wired up; revisit later
 - chore: removed all blog posts to start fresh with new content
 - feat: `/style/` page — internal reference (noindex, not in nav) rendering color tokens, type scale, spacing scale, category badges, and dividers
-- feat: `/reference/` page — internal reference (noindex, not in nav) rendering sample markdown through the live `post__body` styles
-- fix: `.post__body img` and `.post__body table` had no styling — added
+- feat: `/reference/` page — plain markdown file (`src/reference.md`), editable directly; renders through the live `post__body` styles, covering headings (h2-h4), nested lists, typographer, linkify, raw HTML passthrough, tables, code blocks, and calling out what's not supported (footnotes, callouts, margin notes, custom heading IDs, page breaks)
+- fix: `.post__body img`, `.post__body table`, and `.post__body h4` had no styling — added
+- fix: Google Fonts link only loaded IBM Plex Serif at weight 400 — bold text and h3/h4 headings had no real bold face to render with; added weight 700 (roman + italic)
 
 ---
 

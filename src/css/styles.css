@@ -402,6 +402,18 @@ a {
   margin: var(--space-7) 0 var(--space-2);
 }
 
+.post__body h4 {
+  font-size: var(--text-sm);
+  margin: var(--space-6) 0 var(--space-2);
+}
+
+.post__body mark {
+  background: var(--color-accent-pale);
+  color: var(--color-text);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
 .post__body ul,
 .post__body ol {
   padding-left: 1.6rem;
