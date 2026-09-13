@@ -4,6 +4,12 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.thedataareclean.workers.dev
 
+app_title: Outside the Boxplot Admin
+
+logo:
+  src: /favicon.svg
+  show_in_header: true
+
 media_folder: src/images
 public_folder: /images
 
