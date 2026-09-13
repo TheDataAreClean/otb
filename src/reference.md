@@ -130,22 +130,50 @@ An image, constrained to the document width:
 
 ## Callouts
 
-musings has a callout shortcode for asides and warnings, with faint colored backgrounds. Not implemented here — would need a custom Eleventy shortcode or a markdown-it container plugin.
+{% callout "note" %}
+A note callout. Use this for asides, clarifications, or additional context that is useful but not essential to the main argument. It has a faint yellow background.
+{% endcallout %}
+
+{% callout "warning" %}
+A warning callout. Use this for things the reader should be careful about — exceptions, caveats, known failure modes. It has a faint orange background.
+{% endcallout %}
+
+Built as a paired Eleventy shortcode (`{% raw %}{% callout "note" %}...{% endcallout %}{% endraw %}`), not a markdown-it plugin — matching musings' own approach.
 
 ***
 
 ## Margin notes
 
-musings can place a short aside in the margin on wide screens, inline on narrow ones. Not implemented here — same as callouts, this needs a dedicated shortcode.
+{% marginnote %}
+A margin note sits here, to the left of the content on wide screens, and inline on narrow ones. Use it for short asides that would interrupt the prose if embedded in it.
+{% endmarginnote %}
+
+The paragraph that hosts a margin note should be self-contained — readable without the note. The note adds, it does not complete. This is the difference between a margin note and a footnote: margin notes are optional; footnotes are referenced.[^1]
 
 ***
 
 ## Custom heading IDs
 
-musings uses `markdown-it-attrs` to override auto-generated heading slugs for stable deep links. Not installed here — and there's no heading-anchor plugin either, so headings in a real post get no `id` attribute at all. No deep-linking to a specific section is possible today.
+The `markdown-it-attrs` plugin lets you attach HTML attributes to any block element by appending them in curly braces. The most useful case is giving a heading a stable ID for deep links:
+
+```markdown
+## My Heading { #custom-id }
+## My Heading { .custom-class }
+## My Heading { data-foo="bar" }
+```
+
+Note: because this site processes Nunjucks before markdown, ID attrs must be written with a space before the hash — `{ #id }` rather than the collapsed form. Class and data attributes (`{.class}`, `{data-x="y"}`) have no such restriction.
+
+There's still no heading-anchor plugin, so a heading gets no `id` at all unless you add one explicitly this way — no automatic slugs like musings generates for every heading.
 
 ***
 
 ## Footnotes
 
-musings numbers and links footnotes automatically via a markdown-it footnote plugin. Not installed here — a footnote written in the source would render as literal text, not a linked reference.
+Footnotes are numbered automatically and linked bidirectionally.[^2] The reference appears inline as a superscript; the note appears at the bottom of the document with a return link.
+
+They are for genuine supplementary material — citations, extended asides, qualifications that would slow the prose if embedded in it. If you find yourself writing footnotes longer than the paragraphs they annotate, reconsider whether the footnote belongs in the body or in a separate section.
+
+[^1]: The footnote itself, demonstrating its own form. The text above references this note; this note does not assume you read the text above in order to make sense. That is the test.
+
+[^2]: A second footnote. The numbering is automatic — add or remove footnotes anywhere in the document and the numbers update.

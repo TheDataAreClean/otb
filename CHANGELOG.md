@@ -17,9 +17,13 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - chore: removed newsletter signup (page, forms, nav link, CSS) — Buttondown was never wired up; revisit later
 - chore: removed all blog posts to start fresh with new content
 - feat: `/style/` page — internal reference (noindex, not in nav) rendering color tokens, type scale, spacing scale, category badges, and dividers
-- feat: `/reference/` page — plain markdown file (`src/reference.md`), editable directly; renders through the live `post__body` styles, covering headings (h2-h4), nested lists, typographer, linkify, raw HTML passthrough, tables, code blocks, and calling out what's not supported (footnotes, callouts, margin notes, custom heading IDs, page breaks)
+- feat: `/reference/` page — plain markdown file (`src/reference.md`), editable directly; mirrors [musings' formatting reference](https://musings.thedataareclean.com/ideas/2026-03-01-formatting-reference/), covering headings (h2-h4), nested lists, typographer, linkify, raw HTML passthrough, tables, code blocks, footnotes, callouts, margin notes, and custom heading IDs
 - fix: `.post__body img`, `.post__body table`, and `.post__body h4` had no styling — added
 - fix: Google Fonts link only loaded IBM Plex Serif at weight 400 — bold text and h3/h4 headings had no real bold face to render with; added weight 700 (roman + italic)
+- feat: footnotes via `markdown-it-footnote` — numbered, bidirectionally linked
+- feat: custom heading IDs/classes/data-attrs via `markdown-it-attrs`
+- feat: `{% callout %}` and `{% marginnote %}` paired shortcodes — note/warning callouts with tinted backgrounds; margin notes that float left of content at ≥1100px and sit inline below that
+- style: `--color-code-bg` and `--color-code-inline` now both alias `--color-accent-pale` instead of separate greys
 
 ---
 

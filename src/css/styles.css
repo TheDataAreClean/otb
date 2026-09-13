@@ -24,8 +24,14 @@
   --color-accent-border: #7aab8a;   /* ~3.3:1 on surface — passes UI contrast */
 
   /* — Colour: code — */
-  --color-code-bg:       #f3f3f0;
-  --color-code-inline:   #f0f0ed;
+  --color-code-bg:       var(--color-accent-pale);
+  --color-code-inline:   var(--color-accent-pale);
+
+  /* — Colour: callouts — */
+  --color-note-bg:       #fdf6e3;
+  --color-note-border:   #d9c58a;
+  --color-warning-bg:    #fdf1e6;
+  --color-warning-border: #d9a878;
 
   /* — Colour: grid — */
   --color-grid:          rgba(184, 216, 176, 0.18);
@@ -384,6 +390,7 @@ a {
 
 .post__body {
   font-size: var(--text-base);
+  position: relative;
 }
 
 .post__body p {
@@ -493,6 +500,85 @@ a {
   font-family: var(--font-sans);
   color: var(--color-text-muted);
   font-weight: 500;
+}
+
+.post__body .footnote-ref a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.post__body .footnotes {
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.post__body .footnotes-list {
+  padding-left: 1.4rem;
+}
+
+.post__body .footnote-item p {
+  margin-bottom: 0;
+}
+
+.post__body .footnote-backref {
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: var(--space-1);
+}
+
+/* === Callouts =============================================== */
+
+.callout {
+  padding: var(--space-5) var(--space-6);
+  margin: var(--space-7) 0;
+  border-left: 3px solid;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout--note {
+  background: var(--color-note-bg);
+  border-color: var(--color-note-border);
+}
+
+.callout--warning {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
+}
+
+/* === Margin notes ============================================ */
+
+.margin-note {
+  display: block;
+  margin: var(--space-6) 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-code-bg);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.margin-note p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1100px) {
+  .margin-note {
+    position: absolute;
+    left: -200px;
+    width: 160px;
+    margin: 0;
+    background: none;
+    padding: 0;
+    border-left: 2px solid var(--color-accent-border);
+    padding-left: var(--space-3);
+  }
 }
 
 .post__footer {

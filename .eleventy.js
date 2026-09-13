@@ -4,16 +4,29 @@ const fs = require('fs');
 const path = require('path');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 const markdownIt = require('markdown-it');
+const markdownItFootnote = require('markdown-it-footnote');
+const markdownItAttrs = require('markdown-it-attrs');
 const categoriesData = require('./src/_data/categories.js');
 const categoryMap = Object.fromEntries(categoriesData.map((c) => [c.slug, c]));
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
-  const md = markdownIt({ html: true, linkify: true, typographer: true });
+  const md = markdownIt({ html: true, linkify: true, typographer: true })
+    .use(markdownItFootnote)
+    .use(markdownItAttrs);
   eleventyConfig.setLibrary('md', md);
 
   eleventyConfig.addFilter('markdownify', (str) => md.render(str || ''));
+
+  eleventyConfig.addPairedShortcode('callout', (content, type) => {
+    const kind = (type || 'note').toLowerCase();
+    return `<div class="callout callout--${kind}">\n${md.render((content || '').trim())}</div>`;
+  });
+
+  eleventyConfig.addPairedShortcode('marginnote', (content) =>
+    `<aside class="margin-note">\n${md.render((content || '').trim())}</aside>`
+  );
 
   eleventyConfig.addFilter('readableDate', (dateStr) =>
     new Date(dateStr).toLocaleDateString('en-US', {
