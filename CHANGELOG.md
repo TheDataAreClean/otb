@@ -6,6 +6,10 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
+---
+
+## 2026-09-13 (v1.1.0)
+
 - feat: SVG logo system — `logo.svg`, `logo-mark.svg`; all icons generated at build time via Playwright (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`)
 - feat: OG image redesigned — left-aligned layout with logo, rule, title, subtitle
 - feat: anatomy diagram saved as `images/anatomy-figure.svg` + `.png`; served via `<picture>` on about page
