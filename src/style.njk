@@ -1,0 +1,123 @@
+---
+layout: base.njk
+title: Style
+permalink: /style/
+eleventyExcludeFromCollections: true
+noindex: true
+---
+
+{% set colors = [
+  { name: "bg",            var: "--color-bg",            hex: "#fafaf8" },
+  { name: "surface",       var: "--color-surface",       hex: "#ffffff" },
+  { name: "border",        var: "--color-border",        hex: "#e4e4e0" },
+  { name: "border-subtle", var: "--color-border-subtle", hex: "#eeeeeb" },
+  { name: "divider",       var: "--color-divider",       hex: "#d8d8d4" },
+  { name: "text",          var: "--color-text",          hex: "#1a1a18" },
+  { name: "text-muted",    var: "--color-text-muted",    hex: "#666660" },
+  { name: "text-faint",    var: "--color-text-faint",    hex: "#999994" },
+  { name: "accent",        var: "--color-accent",        hex: "#4a7c59" },
+  { name: "accent-dark",   var: "--color-accent-dark",   hex: "#3d6b4a" },
+  { name: "accent-pale",   var: "--color-accent-pale",   hex: "#e8f2e4" },
+  { name: "accent-border", var: "--color-accent-border", hex: "#7aab8a" },
+  { name: "code-bg",       var: "--color-code-bg",       hex: "#f3f3f0" },
+  { name: "code-inline",   var: "--color-code-inline",   hex: "#f0f0ed" }
+] %}
+
+{% set typeScale = [
+  { label: "xs / 11.7px",  var: "--text-xs" },
+  { label: "sm / 13.8px",  var: "--text-sm" },
+  { label: "base / 17px",  var: "--text-base" },
+  { label: "md / 18px",    var: "--text-md" },
+  { label: "lg / 21px",    var: "--text-lg" },
+  { label: "xl / 25.5px",  var: "--text-xl" },
+  { label: "2xl / 29.75px", var: "--text-2xl" }
+] %}
+
+{% set spaceScale = [
+  { label: "1 / 4px",  var: "--space-1" },
+  { label: "2 / 8px",  var: "--space-2" },
+  { label: "3 / 12px", var: "--space-3" },
+  { label: "4 / 16px", var: "--space-4" },
+  { label: "5 / 20px", var: "--space-5" },
+  { label: "6 / 24px", var: "--space-6" },
+  { label: "7 / 28px", var: "--space-7" },
+  { label: "8 / 32px", var: "--space-8" },
+  { label: "10 / 40px", var: "--space-10" },
+  { label: "12 / 48px", var: "--space-12" },
+  { label: "16 / 64px", var: "--space-16" }
+] %}
+
+<article class="page">
+  <h1 class="page__title">Style</h1>
+  <p class="styleguide-intro">
+    Internal reference, not linked in navigation. Documents the design tokens
+    and reusable components currently defined in <code>src/css/styles.css</code>
+    — colors, type, spacing, badges, dividers. For how post content renders,
+    see <a href="/reference/">/reference/</a>.
+  </p>
+
+  <section class="styleguide-section">
+    <h2 class="category-heading">Fonts</h2>
+    <div class="styleguide-type-row">
+      <span class="styleguide-type-row__label">Serif (body)</span>
+      <span style="font-family: var(--font-serif); font-size: var(--text-lg);">IBM Plex Serif — The quick brown fox</span>
+    </div>
+    <div class="styleguide-type-row">
+      <span class="styleguide-type-row__label">Sans (UI)</span>
+      <span style="font-family: var(--font-sans); font-size: var(--text-lg);">IBM Plex Sans — The quick brown fox</span>
+    </div>
+  </section>
+
+  <section class="styleguide-section">
+    <h2 class="category-heading">Type scale</h2>
+    {% for t in typeScale %}
+    <div class="styleguide-type-row">
+      <span class="styleguide-type-row__label">{{ t.label }}</span>
+      <span style="font-size: var({{ t.var }});">Set the type at this size</span>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="styleguide-section">
+    <h2 class="category-heading">Colors</h2>
+    <div class="styleguide-swatches">
+      {% for c in colors %}
+      <div class="styleguide-swatch">
+        <div class="styleguide-swatch__color" style="background: var({{ c.var }}); border-bottom: 1px solid var(--color-border);"></div>
+        <div class="styleguide-swatch__label">
+          <span class="styleguide-swatch__name">{{ c.name }}</span>
+          <span class="styleguide-swatch__hex">{{ c.hex }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="styleguide-section">
+    <h2 class="category-heading">Spacing (4px base unit)</h2>
+    {% for s in spaceScale %}
+    <div class="styleguide-space-row">
+      <span class="styleguide-space-row__label">{{ s.label }}</span>
+      <div class="styleguide-space-row__bar" style="width: var({{ s.var }});"></div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="styleguide-section">
+    <h2 class="category-heading">Category badges</h2>
+    <div class="styleguide-badges">
+      {% for cat in categories %}
+      <span class="badge badge--{{ cat.slug }}">{{ cat.slug | categoryIcon | safe }}{{ cat.slug | categoryLabel }}</span>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="styleguide-section styleguide-dividers">
+    <h2 class="category-heading">Hand-drawn dividers</h2>
+    {% for i in range(0, 5) %}
+    <svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true">
+      <path d="{{ i | postDivider }}" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    {% endfor %}
+  </section>
+</article>

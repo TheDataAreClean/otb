@@ -16,7 +16,8 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - infra: `svgContents` filter for inlining SVG files in templates
 - chore: removed newsletter signup (page, forms, nav link, CSS) — Buttondown was never wired up; revisit later
 - chore: removed all blog posts to start fresh with new content
-- feat: `/style-guide/` page — internal reference (noindex, not in nav) rendering color tokens, type scale, spacing scale, category badges, dividers, and live markdown/`post__body` formatting
+- feat: `/style/` page — internal reference (noindex, not in nav) rendering color tokens, type scale, spacing scale, category badges, and dividers
+- feat: `/reference/` page — internal reference (noindex, not in nav) rendering sample markdown through the live `post__body` styles
 - fix: `.post__body img` and `.post__body table` had no styling — added
 
 ---

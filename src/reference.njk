@@ -1,0 +1,69 @@
+---
+layout: base.njk
+title: Reference
+permalink: /reference/
+eleventyExcludeFromCollections: true
+noindex: true
+---
+
+{% set sampleMarkdown %}
+## A second-level heading
+
+Section headings use `##`. Structure comes from spacing and weight, not a heavy visual hierarchy.
+
+### A third-level heading
+
+Used sparingly, for subsections within a section.
+
+Running prose can include **bold text** for emphasis, *italic text* for stress, and ~~strikethrough~~ for corrections. Inline `code` renders in a monospace font with a faint background — for filenames, variables, short technical terms.
+
+[External links](https://example.com) and internal links both use the accent color, underlined on hover.
+
+> A blockquote is for text that originates elsewhere. It renders indented, in italic, with a faint left border.
+
+An unordered list:
+
+- The first item
+- A second item
+- A third item
+
+An ordered list:
+
+1. The first step
+2. The second step
+3. The third step
+
+A fenced code block:
+
+```bash
+npm start
+# → Server at http://localhost:8080
+```
+
+A table:
+
+| Element | Markdown |
+| --- | --- |
+| Bold | `**text**` |
+| Italic | `*text*` |
+| Code | `` `code` `` |
+
+---
+
+An image, constrained to the content width:
+
+![Box plot anatomy diagram](/images/anatomy-figure.png)
+  {% endset %}
+
+<article class="page">
+  <h1 class="page__title">Reference</h1>
+  <p class="styleguide-intro">
+    Internal reference, not linked in navigation. Renders sample markdown
+    through the same <code>markdownify</code> filter and <code>.post__body</code>
+    styles a real post uses — a preview of what a new post can contain.
+    Reflects what this site's markdown setup actually supports today — no
+    footnote, callout, or margin-note plugins installed. For design tokens
+    (colors, type, spacing, badges), see <a href="/style/">/style/</a>.
+  </p>
+  <div class="post__body">{{ sampleMarkdown | markdownify | safe }}</div>
+</article>
