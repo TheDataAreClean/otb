@@ -49,25 +49,6 @@ layout: base.njk
       <a href="/category/{{ post.category }}/" class="category-more__link">{{ post.category | categoryBrowse }} →</a>
     </div>
 
-    <div class="newsletter-block">
-      <h2 class="newsletter-block__heading">{{ metadata.newsletterHeading }}</h2>
-      <p class="newsletter-block__desc">{{ metadata.newsletterDesc }}</p>
-      {# TODO: replace USERNAME with your Buttondown username to activate #}
-      <form class="newsletter-form" action="https://buttondown.com/api/emails/embed-subscribe/USERNAME" method="post" target="popupwindow">
-        <label for="email-{{ post.slug }}" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="email-{{ post.slug }}"
-          name="email"
-          placeholder="your@email.com"
-          required
-          class="newsletter-form__input"
-          autocomplete="email"
-        >
-        <button type="submit" class="newsletter-form__btn">Subscribe</button>
-      </form>
-    </div>
-
   </footer>
 
 </article>

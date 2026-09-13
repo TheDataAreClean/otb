@@ -28,7 +28,6 @@ No build tools, no bundler. Eleventy reads markdown posts and Nunjucks templates
 | Fonts | IBM Plex Serif (body) + IBM Plex Sans (UI), Google Fonts |
 | Hosting | GitHub Pages + custom domain |
 | CMS | Sveltia CMS (Git-based, via Cloudflare Worker OAuth) |
-| Newsletter | TBD — Buttondown (not yet wired up) |
 
 ---
 
@@ -65,7 +64,6 @@ src/index.njk             Homepage — full post list with category filter links
 src/post.njk              Individual post pages (Eleventy pagination, one page per post)
 src/category.njk          Category-filtered list (pagination over categories)
 src/about.njk             Static about page
-src/newsletter.njk        Newsletter signup page (form placeholder — not yet wired up)
 src/feed.njk              Atom feed → /feed.xml (must have layout: false)
 src/sitemap.njk           Sitemap → /sitemap.xml (must have layout: false)
 src/robots.njk            → /robots.txt (must have layout: false)
