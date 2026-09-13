@@ -25,6 +25,11 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 - feat: `{% callout %}` and `{% marginnote %}` paired shortcodes — note/warning callouts with tinted backgrounds; margin notes that float left of content at ≥1100px and sit inline below that
 - style: `--color-code-bg` and `--color-code-inline` now both alias `--color-accent-pale` instead of separate greys
 - fix: `.post__body blockquote`'s child `<p>` kept its default bottom margin, which doesn't collapse through the blockquote's own padding — left a large gap after quoted text; zeroed on `:last-child`
+- style: merged `--color-border-subtle` into `--color-border` and `--color-text-faint` into `--color-text-muted` — both were near-duplicates used in one place each, and `text-faint`'s original justification (placeholder-only, WCAG-exempt) no longer applied once the newsletter form was removed
+- style: `/style/`'s color swatches now grouped under Surfaces/Text/Accent/Callouts subheadings, and include the callout colors that were missing from the list
+- refactor: consolidated three copies of `p:last-child { margin-bottom: 0; }` (blockquote, callout, margin-note) into one grouped rule; consolidated `markdownify`/`callout`/`marginnote`'s duplicated `md.render()` calls into one `renderMarkdown` helper; removed now-dead `.sr-only` (only user was the removed newsletter form)
+- fix: `.margin-note`'s wide-screen layout used a magic `-200px` offset unrelated to any token — reworked into non-overlapping narrow/wide rules driven by new `--margin-note-width`/`--margin-note-gap` tokens; breakpoint stays 1100px (verified: 230px gutter available there vs. 184px needed)
+- fix: `favicon.svg` used `stroke="currentColor"`, which only resolves correctly when inlined into HTML with a CSS color cascade (as `logo.svg`/`logo-mark.svg` are) — loaded standalone via `<link rel="icon">` it fell back to black; hardcoded to `#4a7c59`
 
 ---
 

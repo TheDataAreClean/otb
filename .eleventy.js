@@ -17,15 +17,17 @@ module.exports = function (eleventyConfig) {
     .use(markdownItAttrs);
   eleventyConfig.setLibrary('md', md);
 
-  eleventyConfig.addFilter('markdownify', (str) => md.render(str || ''));
+  const renderMarkdown = (str) => md.render((str || '').trim());
+
+  eleventyConfig.addFilter('markdownify', renderMarkdown);
 
   eleventyConfig.addPairedShortcode('callout', (content, type) => {
     const kind = (type || 'note').toLowerCase();
-    return `<div class="callout callout--${kind}">\n${md.render((content || '').trim())}</div>`;
+    return `<div class="callout callout--${kind}">\n${renderMarkdown(content)}</div>`;
   });
 
   eleventyConfig.addPairedShortcode('marginnote', (content) =>
-    `<aside class="margin-note">\n${md.render((content || '').trim())}</aside>`
+    `<aside class="margin-note">\n${renderMarkdown(content)}</aside>`
   );
 
   eleventyConfig.addFilter('readableDate', (dateStr) =>

@@ -6,21 +6,41 @@ eleventyExcludeFromCollections: true
 noindex: true
 ---
 
-{% set colors = [
-  { name: "bg",            var: "--color-bg",            hex: "#fafaf8" },
-  { name: "surface",       var: "--color-surface",       hex: "#ffffff" },
-  { name: "border",        var: "--color-border",        hex: "#e4e4e0" },
-  { name: "border-subtle", var: "--color-border-subtle", hex: "#eeeeeb" },
-  { name: "divider",       var: "--color-divider",       hex: "#d8d8d4" },
-  { name: "text",          var: "--color-text",          hex: "#1a1a18" },
-  { name: "text-muted",    var: "--color-text-muted",    hex: "#666660" },
-  { name: "text-faint",    var: "--color-text-faint",    hex: "#999994" },
-  { name: "accent",        var: "--color-accent",        hex: "#4a7c59" },
-  { name: "accent-dark",   var: "--color-accent-dark",   hex: "#3d6b4a" },
-  { name: "accent-pale",   var: "--color-accent-pale",   hex: "#e8f2e4" },
-  { name: "accent-border", var: "--color-accent-border", hex: "#7aab8a" },
-  { name: "code-bg",       var: "--color-code-bg",       hex: "#e8f2e4 (= accent-pale)" },
-  { name: "code-inline",   var: "--color-code-inline",   hex: "#e8f2e4 (= accent-pale)" }
+{% set colorGroups = [
+  {
+    label: "Surfaces",
+    colors: [
+      { name: "bg",             var: "--color-bg",             hex: "#fafaf8" },
+      { name: "surface",        var: "--color-surface",        hex: "#ffffff" },
+      { name: "border",         var: "--color-border",         hex: "#e4e4e0" },
+      { name: "divider",        var: "--color-divider",        hex: "#d8d8d4" }
+    ]
+  },
+  {
+    label: "Text",
+    colors: [
+      { name: "text",           var: "--color-text",           hex: "#1a1a18" },
+      { name: "text-muted",     var: "--color-text-muted",     hex: "#666660" }
+    ]
+  },
+  {
+    label: "Accent",
+    colors: [
+      { name: "accent",         var: "--color-accent",         hex: "#4a7c59" },
+      { name: "accent-dark",    var: "--color-accent-dark",    hex: "#3d6b4a" },
+      { name: "accent-pale",    var: "--color-accent-pale",    hex: "#e8f2e4 (also code bg/inline, margin notes)" },
+      { name: "accent-border",  var: "--color-accent-border",  hex: "#7aab8a" }
+    ]
+  },
+  {
+    label: "Callouts",
+    colors: [
+      { name: "note-bg",        var: "--color-note-bg",        hex: "#fdf6e3" },
+      { name: "note-border",    var: "--color-note-border",    hex: "#d9c58a" },
+      { name: "warning-bg",     var: "--color-warning-bg",     hex: "#fdf1e6" },
+      { name: "warning-border", var: "--color-warning-border", hex: "#d9a878" }
+    ]
+  }
 ] %}
 
 {% set typeScale = [
@@ -80,8 +100,10 @@ noindex: true
 
   <section class="styleguide-section">
     <h2 class="category-heading">Colors</h2>
+    {% for group in colorGroups %}
+    <h3 class="styleguide-subheading">{{ group.label }}</h3>
     <div class="styleguide-swatches">
-      {% for c in colors %}
+      {% for c in group.colors %}
       <div class="styleguide-swatch">
         <div class="styleguide-swatch__color" style="background: var({{ c.var }}); border-bottom: 1px solid var(--color-border);"></div>
         <div class="styleguide-swatch__label">
@@ -91,6 +113,7 @@ noindex: true
       </div>
       {% endfor %}
     </div>
+    {% endfor %}
   </section>
 
   <section class="styleguide-section">
