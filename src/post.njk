@@ -23,11 +23,12 @@ layout: base.njk
 
   <footer class="post__footer">
 
-    {% set sortedPosts = posts | sortByDate %}
-    {% set currentIndex = 0 %}
+    {% set sortedPosts = posts | published | sortByDate %}
+    {% set currentIndex = -1 %}
     {% for p in sortedPosts %}{% if p.slug == post.slug %}{% set currentIndex = loop.index0 %}{% endif %}{% endfor %}
+    {# A draft in a build is not in the list, so it has no newer/older neighbours #}
     {% if currentIndex > 0 %}{% set newerPost = sortedPosts[currentIndex - 1] %}{% endif %}
-    {% set olderPost = sortedPosts[currentIndex + 1] %}
+    {% if currentIndex >= 0 %}{% set olderPost = sortedPosts[currentIndex + 1] %}{% endif %}
 
     <nav class="post-nav" aria-label="More posts">
       {% if newerPost %}

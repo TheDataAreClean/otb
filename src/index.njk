@@ -13,7 +13,7 @@ permalink: /
   </nav>
 
   <ol class="post-list" reversed>
-    {% for post in posts | sortByDate %}
+    {% for post in posts | published | sortByDate %}
     <li class="post-list__item">
       <a href="{{ post | postUrl }}" class="post-list__link">
         <span class="post-list__title">{{ post.title }}</span>

@@ -23,7 +23,7 @@ layout: base.njk
   <p class="category-heading">{{ category.name }}</p>
 
   <ol class="post-list" reversed>
-    {% set filtered = posts | filterByCategory(category.slug) | sortByDate %}
+    {% set filtered = posts | published | filterByCategory(category.slug) | sortByDate %}
     {% for post in filtered %}
     <li class="post-list__item">
       <a href="{{ post | postUrl }}" class="post-list__link">

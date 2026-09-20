@@ -3,9 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager — Outside the Boxplot</title>
+  <title>Outside the Boxplot Admin</title>
+  <script>
+    // Sveltia CMS rewrites the title as it loads (CMS name → site URL).
+    // Put it straight back so the tab always reads "Outside the Boxplot Admin".
+    // This watches the <title> element rather than redefining document.title,
+    // so nothing else that reads or sets document.title is affected.
+    (function () {
+      var pinned = 'Outside the Boxplot Admin';
+      new MutationObserver(function () {
+        var t = document.querySelector('title');
+        if (t && t.textContent !== pinned) t.textContent = pinned;
+      }).observe(document.head, { childList: true, subtree: true, characterData: true });
+    })();
+  </script>
+  <meta name="description" content="Outside the Boxplot admin." />
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
+  <meta name="theme-color" content="#4a7c59" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 </head>
 <body>
-  <script src="https://unpkg.com/@sveltia/cms@0.211.2/dist/sveltia-cms.js"></script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 </body>
 </html>

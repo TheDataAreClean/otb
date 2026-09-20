@@ -36,11 +36,12 @@ module.exports = function () {
       const { data, body } = parseFrontmatter(raw);
       return {
         title: data.title || '',
-        slug: path.basename(file, '.md'),
+        slug: data.slug || path.basename(file, '.md'),
         excerpt: data.excerpt || '',
         body,
         category: data.category || 'other',
         published_date: data.published_date || '',
+        draft: data.draft === 'true',
       };
     })
     .sort((a, b) => new Date(b.published_date) - new Date(a.published_date));

@@ -16,7 +16,7 @@ eleventyExcludeFromCollections: true
     <loc>{{ metadata.url }}/category/{{ cat.slug }}/</loc>
   </url>
   {% endfor %}
-  {% for post in posts | sortByDate %}
+  {% for post in posts | published | sortByDate %}
   <url>
     <loc>{{ metadata.url }}{{ post | postUrl }}</loc>
     <lastmod>{{ post.published_date | htmlDateString }}</lastmod>
