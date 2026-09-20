@@ -23,9 +23,12 @@ Full command reference: [COMMANDS.md](COMMANDS.md)
 src/              Content, templates, CSS, and static assets
   posts/          Markdown posts (one file = one post)
   _includes/      Nunjucks layouts and partials
-  _data/          Global data — posts.js, categories.js, metadata.js
+  _data/          Global data — posts.js, categories.js, metadata.js, tokens.js
   css/            Single stylesheet (styles.css)
+  js/             margin-notes.js — highlights a margin note's phrase
   admin/          Sveltia CMS entry point + config.yml
+  reference.md    /reference/ — every markdown element (internal, noindex)
+  style.njk       /style/ — design tokens and components (internal, noindex)
   images/         CMS-uploaded images
 .eleventy.js      Eleventy config — filters, passthrough copies
 .github/          Deploy workflow (GitHub Actions → GitHub Pages)

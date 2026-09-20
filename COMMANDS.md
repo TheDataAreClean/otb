@@ -11,7 +11,7 @@ Shell commands and Claude Code prompts for working on this repo.
 | Install | `npm install` |
 | Dev server | `npm start` |
 | Build | `npm run build` |
-| Generate OG image only | `npm run generate:images` |
+| Generate OG image and icons only | `npm run generate:images` (needs `npx playwright install chromium` + ImageMagick) |
 | Check vulnerabilities | `npm audit` |
 | List available updates | `npm outdated` |
 
