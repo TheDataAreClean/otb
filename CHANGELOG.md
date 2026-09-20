@@ -8,6 +8,27 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ---
 
+## 2026-09-20 (v1.3.0)
+
+Brings the `/reference/` and `/style/` pages and the CMS editor in line with musings, adapted to this site's own design — plus heading anchors, phrase-highlighted margin notes, a hand-drawn section break, drafts and slug overrides, and fixes so shortcodes work inside posts and the Atom feed renders correctly.
+
+- feat: `/reference/` is now musings' reference page content, adapted — `reference.md` replaced with musings' text; only sentences that described musings' own look (Docs chrome, grey desk, comment rail, browser link colour) or were wrong (`--` is an en dash, not an em dash) were reworded. The fourth-level heading sample now uses `####` (musings' source used `###`). The `intro` line and the "not implemented" notes are gone; `reference-page.njk` no longer prints an intro
+- feat: heading anchors — `markdown-it-anchor` gives every heading an id and links it to itself; `{ #id }` still overrides
+- feat: `{% marginnote "phrase" %}` — the phrase is highlighted in the paragraph after the note (`src/js/margin-notes.js`), hover/focus links the two
+- feat: section break — `---` / `***` in markdown now draws one of the hand-drawn dividers used between posts in a list (`md.renderer.rules.hr`), instead of a plain 1px line. Musings' page break is not carried over: it only makes sense in a paginated-document look, so the reference page's "Page break" section became "Section break"
+- fix: `callout` and `marginnote` shortcodes printed literally inside posts, because post bodies are rendered by `markdownify` without Nunjucks. `markdownify` now expands them
+- fix: Atom feed showed literal HTML tags — `feed.njk` wrapped the post body in `<![CDATA[…]]>` but Nunjucks also HTML-escaped it. Body now goes in `<content type="html">` as escaped text (the standard form). Never noticed because no posts existed
+- fix: feed links — heading anchors and footnote links resolved to `<site>/#id` (the home page). New `feedContent` filter unwraps heading self-links, points footnote links at the post, and swaps the SVG section break for an `<hr>`
+- feat: `/style/` rebuilt in musings' structure and read from `styles.css`'s `:root` block by `src/_data/tokens.js` — no more hardcoded hex/scale lists. Adds line heights, shape and layout, and the components section (badges, dividers and section break, margin note, callouts); removes the unused `.styleguide-*` CSS
+- feat: CMS editor — `draft` toggle, optional `slug` override, field hints, `label_singular`, ASCII slugs
+- feat: `draft: true` posts are hidden from the home list, category pages, feed and sitemap in a build (`published` filter); `slug` front matter overrides the filename in `posts.js`
+- feat: admin page — Sveltia is no longer pinned to `0.211.2`; it loads the latest from unpkg, as musings does. Tab title pinned to "Outside the Boxplot Admin", `noindex, nofollow, noarchive, noimageindex`, theme colour and icon links
+- fix: About page scrolled sideways on phones — the anatomy diagram is a fixed 520px `<img>` with no `max-width`; it now shrinks to fit
+- infra: added `markdown-it-anchor`; `src/js/` is passthrough-copied
+- docs: corrected the image-generation notes in APP.md/CLAUDE.md (Playwright + ImageMagick, not resvg; the OG PNG is build output, not committed) and the `URL` env var (set in `deploy.yml`); README layout and file map updated; FUTURE.md no longer lists the removed newsletter form or calls Playwright unused, and now tracks the unused `@resvg/resvg-js`/`opentype.js` dependencies
+
+---
+
 ## 2026-09-13 (v1.2.0)
 
 Fixes the Sveltia CMS admin interface, which was completely broken (blank page, then a rejected config) after an upstream package rename — and adds custom branding to it.
