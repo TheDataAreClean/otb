@@ -443,6 +443,34 @@ a {
   color: var(--color-accent-dark);
 }
 
+/* Heading anchors (markdown-it-anchor): the heading text is the link */
+
+.post__body .header-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post__body .header-anchor:hover {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+}
+
+/* Section break: --- or *** in markdown draws a hand-drawn divider — the same
+   paths as between posts in a list (see the hr rule in .eleventy.js). A raw
+   <hr> and the footnotes separator stay a thin line. */
+
+.section-break {
+  display: block;
+  width: 100%;
+  height: 8px;
+  overflow: visible;
+  margin: var(--space-8) 0;
+}
+
+.section-break path {
+  stroke: var(--color-divider);
+}
+
 .post__body hr {
   border: none;
   border-top: 1px solid var(--color-border);
@@ -553,6 +581,22 @@ a {
   color: var(--color-text-muted);
 }
 
+/* The phrase a margin note is about, highlighted by src/js/margin-notes.js */
+
+.margin-note-anchor {
+  background: var(--color-accent-pale);
+  border-bottom: 1px solid var(--color-accent-border);
+}
+
+.margin-note-anchor.is-active {
+  background: var(--color-accent-border);
+}
+
+.margin-note.is-active {
+  color: var(--color-text);
+  border-left-color: var(--color-accent-dark);
+}
+
 @media (max-width: 1099px) {
   .margin-note {
     padding: var(--space-3) var(--space-4);
@@ -653,6 +697,12 @@ a {
   border-radius: var(--radius-md);
 }
 
+.anatomy-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 /* === Static pages ========================================= */
 
 .page__title {
@@ -693,112 +743,95 @@ a {
   letter-spacing: 0.06em;
 }
 
-/* === Style guide (internal reference — not linked in nav) = */
+/* === Style page — token reference (/style/, not linked in nav) = */
 
-.styleguide-section {
-  margin-bottom: var(--space-12);
+.token-row {
+  margin-bottom: var(--space-4);
 }
 
-.styleguide-intro {
+.post__body .token-row p {
+  margin-bottom: 0;
+}
+
+.token-row__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  align-items: baseline;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
-  margin-bottom: var(--space-10);
-  max-width: 46ch;
 }
 
-.styleguide-subheading {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin: var(--space-6) 0 var(--space-3);
-}
-
-.styleguide-subheading:first-of-type {
-  margin-top: 0;
-}
-
-.styleguide-swatches {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.styleguide-swatch {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.styleguide-swatch__color {
-  height: 56px;
-}
-
-.styleguide-swatch__label {
-  padding: var(--space-2) var(--space-3);
-  font-family: var(--font-sans);
-}
-
-.styleguide-swatch__name {
-  display: block;
-  font-size: var(--text-xs);
-  color: var(--color-text);
-}
-
-.styleguide-swatch__hex {
-  display: block;
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-}
-
-.styleguide-type-row {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-5);
-  padding: var(--space-3) 0;
+.token-row__specimen {
+  padding: var(--space-2) 0;
   border-bottom: 1px solid var(--color-border);
 }
 
-.styleguide-type-row__label {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  width: 100px;
-  flex-shrink: 0;
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--space-4) var(--space-3);
+  margin-bottom: var(--space-6);
 }
 
-.styleguide-space-row {
+.swatch {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-2) 0;
-}
-
-.styleguide-space-row__label {
+  flex-direction: column;
+  gap: var(--space-1);
   font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  width: 60px;
-  flex-shrink: 0;
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  min-width: 0;
 }
 
-.styleguide-space-row__bar {
-  height: 12px;
+.swatch__chip {
+  display: block;
+  height: var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.swatch code,
+.space-row code {
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.swatch__value,
+.space-row__value {
+  font-size: var(--text-xs);
+}
+
+.swatch__note,
+.space-row__note {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.space-list {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.space-row {
+  display: grid;
+  grid-template-columns: 8rem 6rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+}
+
+.space-row__bar {
+  display: block;
+  height: var(--space-3);
   background: var(--color-accent-pale);
   border: 1px solid var(--color-accent-border);
 }
 
-.styleguide-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.styleguide-dividers svg {
+.divider-list svg {
   margin-bottom: var(--space-4);
 }
 
@@ -822,6 +855,15 @@ a {
 
   .post-nav {
     grid-template-columns: 1fr;
+  }
+
+  .space-row {
+    grid-template-columns: 7rem 1fr;
+  }
+
+  .space-row__bar,
+  .space-row__note {
+    grid-column: 1 / -1;
   }
 
   .post-nav__link--right {

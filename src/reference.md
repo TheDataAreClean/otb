@@ -4,34 +4,26 @@ title: Reference
 permalink: /reference/
 eleventyExcludeFromCollections: true
 noindex: true
-intro: >
-  Internal reference, not linked in navigation. Renders this markdown file
-  through the same pipeline and <code>.post__body</code> styles a real post
-  uses — a preview of what a new post can contain, and an honest account of
-  what this site's markdown setup does and doesn't support. Edit this file
-  directly to change it. For design tokens (colors, type, spacing, badges),
-  see <a href="/style/">/style/</a>.
+description: Every element this site's markdown supports, in one place.
 ---
 
-This page exists to show every formatting element this site's markdown setup can render, and to say plainly which ones it can't. It mirrors the shape of [musings' formatting reference](https://musings.thedataareclean.com/ideas/2026-03-01-formatting-reference/), adapted to what's actually installed here.
+This document exists to show every formatting element this site can render. It is a reference and a test. The content is real where it can be; instrumental where it must be.
 
 ## Inline text
 
-Running prose can include **bold text** for emphasis, *italic text* for titles and stress, and ~~strikethrough~~ for corrections or retractions. These can combine: **_bold italic_** works, as does *~~struck italic~~*.
+Running prose can include **bold text** for emphasis, _italic text_ for titles and stress, and ~~strikethrough~~ for corrections or retractions. These can combine: **_bold italic_** works, as does _~~struck italic~~_.
 
 Inline `code` renders in a monospace font with a faint background. It is for short technical terms, variable names, filenames — things that need to be distinguished from prose.
 
-Links come in two kinds. [External links](https://example.com) point away from this site. [Internal links](/about/) navigate within it. Both are underlined by default, in the accent color, darkening on hover. A bare URL like https://example.com also auto-links, no markdown syntax needed — linkify is on.
+Links come in two kinds. [External links](https://www.example.com/) point away from this site. [Internal links](/about/) navigate within it. Both are underlined and use the accent green, darkening on hover.
 
-Raw HTML passes through directly, since it's enabled in the markdown config: <mark>this is highlighted</mark> using a literal `<mark>` tag.
-
-The typographer is on. "Straight quotes" become "curly quotes" automatically, and so do apostrophes in contractions — it's, they're. A double hyphen -- becomes an en dash; a triple hyphen --- becomes an em dash. Three dots... become an ellipsis. (A leading apostrophe, as in '90s, does not convert — a known limitation.)
+The typographer is on. This means "straight quotes" become "curly quotes" automatically. Apostrophes too: it's, they're, don't. A double hyphen -- becomes an en dash and a triple hyphen --- an em dash. Three dots... become an ellipsis.
 
 ***
 
 ## Headings
 
-Headings step down from h2 through h4, each a little smaller and staying close to body size and weight — structure comes from spacing as much as size. `#` (h1) is reserved for the page title itself and isn't used inside post bodies.
+Headings step down from h2 to h4, each a little smaller and staying close to body size and weight. Structure is in the spacing and in the words themselves as much as in visual hierarchy. This is a deliberate choice.
 
 ### Third-level heading
 
@@ -39,7 +31,7 @@ A third-level heading, introduced by `###`. Used for subsections within a sectio
 
 #### Fourth-level heading
 
-A fourth-level heading, `####`. Use sparingly — if a post needs four levels of hierarchy, it may need restructuring.
+A fourth-level heading, `####`. Use sparingly — if you need four levels of hierarchy in a single document, the document may need restructuring.
 
 ***
 
@@ -68,9 +60,11 @@ A list where items are full sentences should end each sentence with a full stop.
 
 ## Blockquote
 
-A blockquote is for quotation — text that originates elsewhere. It renders indented, in italic, with a faint left border. The source, if needed, follows as a regular paragraph.
+A blockquote is for quotation — text that originates elsewhere. It is indented, in italic, with a faint left border. The source, if needed, follows as a regular paragraph.
 
-> Every sentence has a job. If it isn't doing one, cut it.
+> The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function.
+
+F. Scott Fitzgerald, _The Crack-Up_, 1936.
 
 ***
 
@@ -80,9 +74,9 @@ A fenced code block, with syntax annotation:
 
 ```json
 {
-  "title": "Reference",
-  "category": "median",
-  "published_date": "2026-01-01"
+  "title": "A complete formatting reference",
+  "date": "2026-03-26",
+  "tags": ["meta", "design"]
 }
 ```
 
@@ -99,23 +93,25 @@ Code blocks scroll horizontally if the content is wider than the page. They do n
 
 ## Table
 
-Tables use the standard pipe syntax.
+Tables use the standard pipe syntax. Column alignment is set with colons in the separator row.
 
 | Element | Markdown | Renders as |
 | --- | --- | --- |
 | Bold | `**text**` | **text** |
 | Italic | `*text*` | *text* |
 | Strikethrough | `~~text~~` | ~~text~~ |
-| Inline code | `` `code` `` | `code` |
-| Horizontal rule | `---` | a plain divider line |
+| Inline code | `code` | `code` |
+| Horizontal rule | `---` | a hand-drawn line |
 
 Tables should be used for genuinely tabular data. If you find yourself merging cells or nesting tables, a list or prose is probably the right tool.
 
 ***
 
-## Horizontal rule / page break
+## Section break
 
-A plain `---` renders as the divider line above and below this section — there's no lighter typographic "\* \* \*" variant here. musings also supports a full-bleed `<hr class="page-break">` for long, paginated documents; raw HTML would pass through here too, but no `.page-break` style exists in `styles.css`, so it would render as the exact same plain divider line, not a full-bleed band. Not implemented.
+The hand-drawn line between each section of this page is a section break. It is for a change of subject or a pause in the writing, lighter than a heading. A `---` or `***` on a line of its own draws one.
+
+Each one is a slightly different stroke, taken from the same five that separate posts in a list.
 
 ***
 
@@ -123,13 +119,15 @@ A plain `---` renders as the divider line above and below this section — there
 
 An image, constrained to the document width:
 
-![Box plot anatomy diagram](/images/anatomy-figure.png)
+![sample.svg](/images/formatting-reference.svg)
 
-*The anatomy diagram from the About page, standing in for a real photograph. A following paragraph in italic like this one can serve as a caption — captions aren't a built-in feature.*
+Images are block-level. They sit on their own line with vertical spacing above and below. They do not float. Captions are not built in — a following paragraph in _italic_ can serve as one.
+
+_An SVG placeholder standing in for a real photograph. Replace with an actual image file in_ `src/images/`.
 
 ***
 
-## Callouts
+## Callout
 
 {% callout "note" %}
 A note callout. Use this for asides, clarifications, or additional context that is useful but not essential to the main argument. It has a faint yellow background.
@@ -139,23 +137,27 @@ A note callout. Use this for asides, clarifications, or additional context that 
 A warning callout. Use this for things the reader should be careful about — exceptions, caveats, known failure modes. It has a faint orange background.
 {% endcallout %}
 
-Built as a paired Eleventy shortcode (`{% raw %}{% callout "note" %}...{% endcallout %}{% endraw %}`), not a markdown-it plugin — matching musings' own approach.
-
 ***
 
-## Margin notes
+## Margin note
+
+{% marginnote "the words it is about" %}
+This one names its phrase, so only those words are highlighted.
+{% endmarginnote %}
+
+A margin note sits in the margin beside the paragraph it belongs to, with the words it is about highlighted. On a narrow screen the same note becomes a tinted box in the flow of the text, just above that paragraph. Without JavaScript the highlight is missing, but the note is still there.
 
 {% marginnote %}
-A margin note sits here, to the left of the content on wide screens, and inline on narrow ones. Use it for short asides that would interrupt the prose if embedded in it.
+This one names no phrase, so it sits beside the whole paragraph that follows.
 {% endmarginnote %}
 
 The paragraph that hosts a margin note should be self-contained — readable without the note. The note adds, it does not complete. This is the difference between a margin note and a footnote: margin notes are optional; footnotes are referenced.[^1]
 
 ***
 
-## Custom heading IDs
+## Custom IDs via attrs
 
-The `markdown-it-attrs` plugin lets you attach HTML attributes to any block element by appending them in curly braces. The most useful case is giving a heading a stable ID for deep links:
+The `markdown-it-attrs` plugin lets you attach HTML attributes to any block element by appending them in curly braces. The most useful case is overriding the auto-generated heading slug for stable deep links:
 
 ```markdown
 ## My Heading { #custom-id }
@@ -163,9 +165,7 @@ The `markdown-it-attrs` plugin lets you attach HTML attributes to any block elem
 ## My Heading { data-foo="bar" }
 ```
 
-Note: because this site processes Nunjucks before markdown, ID attrs must be written with a space before the hash — `{ #id }` rather than the collapsed form. Class and data attributes (`{.class}`, `{data-x="y"}`) have no such restriction.
-
-There's still no heading-anchor plugin, so a heading gets no `id` at all unless you add one explicitly this way — no automatic slugs like musings generates for every heading.
+Note: standalone pages like this one are processed by Nunjucks before markdown, where the collapsed form of an ID attr starts a comment and swallows the rest of the page. Write it with a space — `{ #id }` — and it works everywhere, posts included. Class and data attributes (`{.class}`, `{data-x="y"}`) have no such restriction.
 
 ***
 

@@ -13,7 +13,7 @@ eleventyExcludeFromCollections: true
   <author>
     <name>{{ metadata.author.name }}</name>
   </author>
-  {% set sorted = posts | sortByDate %}
+  {% set sorted = posts | published | sortByDate %}
   {% if sorted.length %}
   <updated>{{ sorted[0].published_date | toDate | dateToRfc3339 }}</updated>
   {% endif %}
@@ -25,7 +25,7 @@ eleventyExcludeFromCollections: true
     <published>{{ post.published_date | toDate | dateToRfc3339 }}</published>
     <updated>{{ post.published_date | toDate | dateToRfc3339 }}</updated>
     <summary>{{ post.excerpt | escape }}</summary>
-    <content type="html"><![CDATA[{{ post.body | markdownify | htmlToAbsoluteUrls(metadata.url) }}]]></content>
+    <content type="html">{{ post.body | markdownify | feedContent(metadata.url + (post | postUrl)) | htmlToAbsoluteUrls(metadata.url) }}</content>
     <category term="{{ post.category }}"/>
   </entry>
   {% endfor %}

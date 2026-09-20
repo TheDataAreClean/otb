@@ -4,143 +4,173 @@ title: Style
 permalink: /style/
 eleventyExcludeFromCollections: true
 noindex: true
+description: The design tokens and components this site is built from, read from styles.css when the site is built.
 ---
 
-{% set colorGroups = [
-  {
-    label: "Surfaces",
-    colors: [
-      { name: "bg",             var: "--color-bg",             hex: "#fafaf8" },
-      { name: "surface",        var: "--color-surface",        hex: "#ffffff" },
-      { name: "border",         var: "--color-border",         hex: "#e4e4e0" },
-      { name: "divider",        var: "--color-divider",        hex: "#d8d8d4" }
-    ]
-  },
-  {
-    label: "Text",
-    colors: [
-      { name: "text",           var: "--color-text",           hex: "#1a1a18" },
-      { name: "text-muted",     var: "--color-text-muted",     hex: "#666660" }
-    ]
-  },
-  {
-    label: "Accent",
-    colors: [
-      { name: "accent",         var: "--color-accent",         hex: "#4a7c59" },
-      { name: "accent-dark",    var: "--color-accent-dark",    hex: "#3d6b4a" },
-      { name: "accent-pale",    var: "--color-accent-pale",    hex: "#e8f2e4 (also code bg/inline, margin notes)" },
-      { name: "accent-border",  var: "--color-accent-border",  hex: "#7aab8a" }
-    ]
-  },
-  {
-    label: "Callouts",
-    colors: [
-      { name: "note-bg",        var: "--color-note-bg",        hex: "#fdf6e3" },
-      { name: "note-border",    var: "--color-note-border",    hex: "#d9c58a" },
-      { name: "warning-bg",     var: "--color-warning-bg",     hex: "#fdf1e6" },
-      { name: "warning-border", var: "--color-warning-border", hex: "#d9a878" }
-    ]
-  }
-] %}
+{#- Headings on this page match what markdown-it-anchor emits for markdown pages:
+    the heading is a link to its own id. -#}
+{% macro h(level, id, text) -%}
+<h{{ level }} id="{{ id }}"><a class="header-anchor" href="#{{ id }}">{{ text }}</a></h{{ level }}>
+{%- endmacro %}
 
-{% set typeScale = [
-  { label: "xs / 11.7px",  var: "--text-xs" },
-  { label: "sm / 13.8px",  var: "--text-sm" },
-  { label: "base / 17px",  var: "--text-base" },
-  { label: "md / 18px",    var: "--text-md" },
-  { label: "lg / 21px",    var: "--text-lg" },
-  { label: "xl / 25.5px",  var: "--text-xl" },
-  { label: "2xl / 29.75px", var: "--text-2xl" }
-] %}
+{% macro tokenRow(t, style, sample) -%}
+<div class="token-row">
+  <p class="token-row__head"><code>{{ t.name }}</code><span>{{ t.value }}{% if t.note %} · {{ t.note }}{% endif %}</span></p>
+  {% if sample %}<p class="token-row__specimen" style="{{ style }}">{{ sample }}</p>{% endif %}
+</div>
+{%- endmacro %}
 
-{% set spaceScale = [
-  { label: "1 / 4px",  var: "--space-1" },
-  { label: "2 / 8px",  var: "--space-2" },
-  { label: "3 / 12px", var: "--space-3" },
-  { label: "4 / 16px", var: "--space-4" },
-  { label: "5 / 20px", var: "--space-5" },
-  { label: "6 / 24px", var: "--space-6" },
-  { label: "7 / 28px", var: "--space-7" },
-  { label: "8 / 32px", var: "--space-8" },
-  { label: "10 / 40px", var: "--space-10" },
-  { label: "12 / 48px", var: "--space-12" },
-  { label: "16 / 64px", var: "--space-16" }
-] %}
+{% macro rule(i) -%}
+<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d="{{ i | postDivider }}" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+{%- endmacro %}
 
 <article class="page">
   <h1 class="page__title">Style</h1>
-  <p class="styleguide-intro">
-    Internal reference, not linked in navigation. Documents the design tokens
-    and reusable components currently defined in <code>src/css/styles.css</code>
-    — colors, type, spacing, badges, dividers. For how post content renders,
-    see <a href="/reference/">/reference/</a>.
-  </p>
 
-  <section class="styleguide-section">
-    <h2 class="category-heading">Fonts</h2>
-    <div class="styleguide-type-row">
-      <span class="styleguide-type-row__label">Serif (body)</span>
-      <span style="font-family: var(--font-serif); font-size: var(--text-lg);">IBM Plex Serif — The quick brown fox</span>
-    </div>
-    <div class="styleguide-type-row">
-      <span class="styleguide-type-row__label">Sans (UI)</span>
-      <span style="font-family: var(--font-sans); font-size: var(--text-lg);">IBM Plex Sans — The quick brown fox</span>
-    </div>
-  </section>
+  <div class="post__body">
 
-  <section class="styleguide-section">
-    <h2 class="category-heading">Type scale</h2>
-    {% for t in typeScale %}
-    <div class="styleguide-type-row">
-      <span class="styleguide-type-row__label">{{ t.label }}</span>
-      <span style="font-size: var({{ t.var }});">Set the type at this size</span>
-    </div>
-    {% endfor %}
-  </section>
+<p>This page is a reference for how the site looks. Every value below is read from the <code>:root</code> block of <code>src/css/styles.css</code> at build time, so it cannot drift from the real thing. The formatting of the writing itself is on the <a href="/reference/">reference</a> page.</p>
 
-  <section class="styleguide-section">
-    <h2 class="category-heading">Colors</h2>
-    {% for group in colorGroups %}
-    <h3 class="styleguide-subheading">{{ group.label }}</h3>
-    <div class="styleguide-swatches">
-      {% for c in group.colors %}
-      <div class="styleguide-swatch">
-        <div class="styleguide-swatch__color" style="background: var({{ c.var }}); border-bottom: 1px solid var(--color-border);"></div>
-        <div class="styleguide-swatch__label">
-          <span class="styleguide-swatch__name">{{ c.name }}</span>
-          <span class="styleguide-swatch__hex">{{ c.hex }}</span>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </section>
+{{ rule(0) }}
 
-  <section class="styleguide-section">
-    <h2 class="category-heading">Spacing (4px base unit)</h2>
-    {% for s in spaceScale %}
-    <div class="styleguide-space-row">
-      <span class="styleguide-space-row__label">{{ s.label }}</span>
-      <div class="styleguide-space-row__bar" style="width: var({{ s.var }});"></div>
-    </div>
-    {% endfor %}
-  </section>
+{{ h(2, "fonts", "Fonts") }}
 
-  <section class="styleguide-section">
-    <h2 class="category-heading">Category badges</h2>
-    <div class="styleguide-badges">
-      {% for cat in categories %}
-      <span class="badge badge--{{ cat.slug }}">{{ cat.slug | categoryIcon | safe }}{{ cat.slug | categoryLabel }}</span>
-      {% endfor %}
-    </div>
-  </section>
+<p>IBM Plex Serif is the writing. IBM Plex Sans is the interface: navigation, meta lines, badges and labels.</p>
 
-  <section class="styleguide-section styleguide-dividers">
-    <h2 class="category-heading">Hand-drawn dividers</h2>
-    {% for i in range(0, 5) %}
-    <svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true">
-      <path d="{{ i | postDivider }}" fill="none" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    {% endfor %}
-  </section>
+{% for f in tokens.fonts %}
+{{ tokenRow(f, "font-family: var(" + f.name + ");", "The quick brown fox jumps over the lazy dog. 0123456789") }}
+{% endfor %}
+
+{{ rule(1) }}
+
+{{ h(2, "type-scale", "Type scale") }}
+
+<p>Seven sizes, on a 17px root that drops to 16px on screens 720px wide or less.</p>
+
+{% for t in tokens.text %}
+{{ tokenRow(t, "font-size: var(" + t.name + ");", "Every word here is set at this size.") }}
+{% endfor %}
+
+{{ h(3, "line-heights", "Line heights") }}
+
+{% for l in tokens.leading %}
+{{ tokenRow(l) }}
+{% endfor %}
+
+{{ rule(2) }}
+
+{{ h(2, "colors", "Colors") }}
+
+<p>Hex values live in <code>styles.css</code>'s <code>:root</code> block only. Everywhere else uses the token.</p>
+
+{% for g in tokens.colorGroups %}
+{{ h(3, "color-" + (g.title | slugify), g.title) }}
+<div class="swatch-grid">
+  {% for t in g.tokens %}
+  <div class="swatch">
+    <span class="swatch__chip" style="background: var({{ t.name }});"></span>
+    <code>{{ t.name }}</code>
+    <span class="swatch__value">{{ t.value }}</span>
+    {% if t.note %}<span class="swatch__note">{{ t.note }}</span>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endfor %}
+
+{{ rule(3) }}
+
+{{ h(2, "spacing", "Spacing") }}
+
+<p>A scale built on 4px units, in rem so it follows the root size.</p>
+
+<div class="space-list">
+  {% for s in tokens.space %}
+  <div class="space-row">
+    <code>{{ s.name }}</code>
+    <span class="space-row__value">{{ s.value }}</span>
+    <i class="space-row__bar" style="width: var({{ s.name }});"></i>
+  </div>
+  {% endfor %}
+</div>
+
+{{ rule(4) }}
+
+{{ h(2, "shape-and-layout", "Shape and layout") }}
+
+<p>The reading column is <code>--max-width</code> wide. Margin notes sit in the gutter beside it from 1100px up, and inline below that; the gutter is the note width plus the gap. The page background is a graph-paper grid drawn at <code>--grid-size</code>.</p>
+
+<div class="space-list">
+  {% for d in tokens.shape %}
+  <div class="space-row">
+    <code>{{ d.name }}</code>
+    <span class="space-row__value">{{ d.value }}</span>
+    <span class="space-row__note">{{ d.note }}</span>
+  </div>
+  {% endfor %}
+  {% for d in tokens.layout %}
+  <div class="space-row">
+    <code>{{ d.name }}</code>
+    <span class="space-row__value">{{ d.value }}</span>
+    <span class="space-row__note">{{ d.note }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+{{ rule(5) }}
+
+{{ h(2, "components", "Components") }}
+
+{{ h(3, "category-badges", "Category badges") }}
+
+<p>One badge per category, from <code>src/_data/categories.js</code>. The icon is a tiny box plot of the same name.</p>
+
+<div class="badge-list">
+  {% for cat in categories %}
+  <p><span class="badge badge--{{ cat.slug }}">{{ cat.slug | categoryIcon | safe }}{{ cat.slug | categoryLabel }}</span> {{ cat.description }}</p>
+  {% endfor %}
+</div>
+
+{{ h(3, "hand-drawn-dividers", "Hand-drawn dividers and section break") }}
+
+<p>Between posts in a list, cycling through five path variants. The same five are the section break in writing: a <code>---</code> or <code>***</code> on its own line, and every rule on this page.</p>
+
+<div class="divider-list">
+  {% for i in range(0, 5) %}
+  <svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true">
+    <path d="{{ i | postDivider }}" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  {% endfor %}
+</div>
+
+{{ h(3, "margin-note", "Margin note") }}
+
+{% marginnote "the words it is about" %}
+On a wide screen this sits in the margin beside the paragraph. Below 1100px it becomes a tinted box in the flow of the text.
+{% endmarginnote %}
+
+<p>A margin note is attached to the words it is about, so only those words are highlighted. Hover the highlight, or the note, and each lights up the other. Leave the phrase out and the note simply sits beside the paragraph that follows.</p>
+
+<p>Written as:</p>
+
+<pre><code>{% raw %}{% marginnote "the words it is about" %}
+The note. Markdown works in here.
+{% endmarginnote %}{% endraw %}</code></pre>
+
+<p>Put it directly before the paragraph it belongs to. If the phrase is not found in that paragraph, the note is left as it is and the script warns in the console.</p>
+
+{{ h(3, "callouts", "Callouts") }}
+
+{% callout "note" %}
+A note callout: an aside or clarification, on a faint yellow.
+{% endcallout %}
+
+{% callout "warning" %}
+A warning callout: a caveat or a known failure mode, on a faint orange.
+{% endcallout %}
+
+{{ h(3, "highlight-and-links", "Highlight and links") }}
+
+<p>A <mark>highlighted phrase</mark> and an <a href="https://www.example.com/">external link</a>.</p>
+
+  </div>
 </article>
