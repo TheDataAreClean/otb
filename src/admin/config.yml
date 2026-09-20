@@ -4,7 +4,7 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.thedataareclean.workers.dev
 
-app_title: Outside the Boxplot Admin
+app_title: OTB CMS
 
 logo:
   src: /favicon.svg

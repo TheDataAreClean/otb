@@ -139,7 +139,7 @@ Access: `https://otb.thedataareclean.com/admin/` — sign in with GitHub.
 - Every CMS save commits a markdown file to `main`, which triggers `deploy.yml`
 - Images land in `src/images/` and are served from `/images/`
 - `src/admin/config.yml` fields: title, optional slug override, excerpt, category, published date, draft toggle, body — each with an editor hint. `slug.encoding: ascii` keeps filenames URL-safe
-- `src/admin/index.html` is `noindex`, pins the tab title to "Outside the Boxplot Admin" (Sveltia rewrites `<title>` as it loads, so a `MutationObserver` on `<head>` puts it back — it deliberately does not override `document.title`), and loads `@sveltia/cms` unpinned from unpkg (always the latest, same as musings) — if a Sveltia release ever breaks the admin, pin it again by putting `@<version>` after the package name
+- `src/admin/index.html` is `noindex`, is named "OTB CMS" (`app_title` in `config.yml`; the title, `application-name` and `apple-mobile-web-app-title` tags match), pins the tab title to that name (Sveltia rewrites `<title>` as it loads, so a `MutationObserver` on `<head>` puts it back — it deliberately does not override `document.title`), and loads `@sveltia/cms` unpinned from unpkg (always the latest, same as musings) — if a Sveltia release ever breaks the admin, pin it again by putting `@<version>` after the package name
 
 ### Image generation (`scripts/generate-images.js`)
 

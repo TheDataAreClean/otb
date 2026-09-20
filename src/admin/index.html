@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Outside the Boxplot Admin</title>
+  <title>OTB CMS</title>
   <script>
     // Sveltia CMS rewrites the title as it loads (CMS name → site URL).
-    // Put it straight back so the tab always reads "Outside the Boxplot Admin".
+    // Put it straight back so the tab always reads "OTB CMS".
     // This watches the <title> element rather than redefining document.title,
     // so nothing else that reads or sets document.title is affected.
     (function () {
-      var pinned = 'Outside the Boxplot Admin';
+      var pinned = 'OTB CMS';
       new MutationObserver(function () {
         var t = document.querySelector('title');
         if (t && t.textContent !== pinned) t.textContent = pinned;
       }).observe(document.head, { childList: true, subtree: true, characterData: true });
     })();
   </script>
-  <meta name="description" content="Outside the Boxplot admin." />
+  <meta name="description" content="OTB CMS — content manager for Outside the Boxplot (otb.thedataareclean.com). Sign in with GitHub to write and publish posts." />
+  <meta name="application-name" content="OTB CMS" />
+  <meta name="apple-mobile-web-app-title" content="OTB CMS" />
   <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
   <meta name="theme-color" content="#4a7c59" />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
