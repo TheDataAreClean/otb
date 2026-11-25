@@ -6,6 +6,14 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
+Moves the site from Eleventy on GitHub Pages to self-hosted Ghost.
+
+- feat: Ghost theme `theme/` — same design, ported to Handlebars; categories are Ghost tags, URLs unchanged
+- feat: `docker-compose.yml` (Ghost, MySQL, Caddy), `docker-compose.dev.yml`, `HOSTING.md`
+- feat: `ghost/` — routes, redirects, About and Reference content, import builder
+- feat: deploy workflow validates the theme with gscan and deploys it via the Ghost Admin API
+- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, `/style/`, image generation
+
 ---
 
 ## 2026-09-20 (v1.3.0)

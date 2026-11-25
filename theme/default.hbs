@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{meta_title}}</title>
+  <meta name="theme-color" content="#4a7c59">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="{{asset "css/styles.css"}}">
+
+  {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Site navigation">
+      <a href="{{@site.url}}" class="nav__title" aria-label="{{@site.title}} — home">
+        <span class="nav__glyph" aria-hidden="true">{{> logo}}</span>
+      </a>
+      <div class="nav__links">
+        {{#foreach @site.navigation}}
+        <a href="{{url}}" class="nav__link">{{label}}</a>
+        {{/foreach}}
+      </div>
+    </nav>
+    {{> divider-header}}
+  </header>
+
+  <main class="main" id="main-content">
+    {{{body}}}
+  </main>
+
+  <footer class="site-footer">
+    {{> divider-footer}}
+    <p>© {{@site.title}}</p>
+  </footer>
+
+  {{#is "post, page"}}<script src="{{asset "js/margin-notes.js"}}" defer></script>{{/is}}
+  {{ghost_foot}}
+</body>
+</html>

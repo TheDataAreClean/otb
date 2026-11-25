@@ -1,0 +1,43 @@
+{{!< default}}
+{{#post}}
+<article class="post">
+
+  <header class="post__header">
+    <div class="post__meta">
+      {{> post-meta}}
+    </div>
+    <h1 class="post__title">{{title}}</h1>
+  </header>
+
+  <div class="post__body gh-content">
+    {{content}}
+  </div>
+
+  <footer class="post__footer">
+
+    <nav class="post-nav" aria-label="More posts">
+      {{#next_post}}
+      <a href="{{url}}" class="post-nav__link">
+        <span class="post-nav__dir">← Newer</span>
+        <span class="post-nav__title">{{title}}</span>
+      </a>
+      {{else}}<div></div>{{/next_post}}
+      {{#prev_post}}
+      <a href="{{url}}" class="post-nav__link post-nav__link--right">
+        <span class="post-nav__dir">Older →</span>
+        <span class="post-nav__title">{{title}}</span>
+      </a>
+      {{else}}<div></div>{{/prev_post}}
+    </nav>
+
+    {{#primary_tag}}
+    <div class="category-more">
+      {{> badge}}
+      <a href="{{url}}" class="category-more__link">{{#match slug "median"}}More finished essays{{else match slug "box"}}More dense analysis{{else match slug "whisker"}}More recommendations{{else match slug "outlier"}}More rough ideas{{else}}More {{name}} posts{{/match}} →</a>
+    </div>
+    {{/primary_tag}}
+
+  </footer>
+
+</article>
+{{/post}}

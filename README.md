@@ -1,49 +1,10 @@
 # Outside the Boxplot
 
-Digital garden at [otb.thedataareclean.com](https://otb.thedataareclean.com). Writing about data communication and information design — how to make numbers legible to people who need to act on them.
+A digital garden for thinking out loud about data communication. Self-hosted [Ghost](https://ghost.org) with a custom theme.
 
-Post types are named after box plot elements: Median (finished essays), Box (dense analysis), Whisker (recommendations), Outlier (rough ideas).
+- `theme/` — the Ghost theme (Handlebars + one stylesheet). CI deploys it on push to `main`.
+- `ghost/` — routes, redirects, starter content and brand assets to load into Ghost.
+- `docker-compose.yml` — production stack (Ghost, MySQL, Caddy). `docker-compose.dev.yml` — local Ghost.
+- [HOSTING.md](HOSTING.md) setup and operations · [APP.md](APP.md) architecture · [COMMANDS.md](COMMANDS.md) commands · [CLAUDE.md](CLAUDE.md) working rules.
 
----
-
-## Quickstart
-
-```sh
-npm install
-npm start      # dev server → http://localhost:8080
-```
-
-Full command reference: [COMMANDS.md](COMMANDS.md)
-
----
-
-## Top-level layout
-
-```
-src/              Content, templates, CSS, and static assets
-  posts/          Markdown posts (one file = one post)
-  _includes/      Nunjucks layouts and partials
-  _data/          Global data — posts.js, categories.js, metadata.js, tokens.js
-  css/            Single stylesheet (styles.css)
-  js/             margin-notes.js — highlights a margin note's phrase
-  admin/          Sveltia CMS entry point + config.yml
-  reference.md    /reference/ — every markdown element (internal, noindex)
-  style.njk       /style/ — design tokens and components (internal, noindex)
-  images/         CMS-uploaded images
-.eleventy.js      Eleventy config — filters, passthrough copies
-.github/          Deploy workflow (GitHub Actions → GitHub Pages)
-scripts/          Build-time image generation
-```
-
----
-
-## Docs
-
-| File | Purpose |
-|---|---|
-| [README.md](README.md) | This file — what it is and how to start |
-| [APP.md](APP.md) | Architecture and technical reference |
-| [COMMANDS.md](COMMANDS.md) | All commands, copy-paste ready |
-| [CHANGELOG.md](CHANGELOG.md) | Version history |
-| [FUTURE.md](FUTURE.md) | Ideas backlog |
-| [CLAUDE.md](CLAUDE.md) | Working instructions for Claude |
+Before v2.0.0 this was an Eleventy site on GitHub Pages; see [CHANGELOG.md](CHANGELOG.md).

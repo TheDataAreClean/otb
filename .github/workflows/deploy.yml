@@ -1,46 +1,35 @@
-name: Deploy to GitHub Pages
+name: Deploy theme to Ghost
 
 on:
   push:
     branches: [main]
+    paths: ['theme/**', '.github/workflows/deploy.yml']
+  pull_request:
+    paths: ['theme/**']
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npx playwright install chromium --with-deps
-      - run: sudo apt-get update && sudo apt-get install -y imagemagick
-      - run: npm run build
-        env:
-          URL: https://otb.thedataareclean.com
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_site
+          node-version: '22'
+      - run: npm install --no-package-lock
+      - run: npm run theme:check
 
   deploy:
-    needs: build
+    needs: validate
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment
+      - uses: actions/checkout@v4
+      # Needs repo secrets GHOST_ADMIN_API_URL (https://otb.thedataareclean.com)
+      # and GHOST_ADMIN_API_KEY (Ghost Admin → Settings → Integrations → custom).
+      - uses: TryGhost/action-deploy-theme@v1
+        with:
+          api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
+          api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          theme-name: otb
+          working-directory: theme

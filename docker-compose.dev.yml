@@ -1,0 +1,21 @@
+# Local development: Ghost with SQLite on http://localhost:2368, the theme
+# mounted live from ./theme. No .env needed.
+#   docker compose -f docker-compose.dev.yml up
+# Then activate "otb" in Ghost Admin → Settings → Design → Change theme.
+
+services:
+  ghost:
+    image: ghost:6-alpine
+    ports:
+      - "2368:2368"
+    environment:
+      url: http://localhost:2368
+      NODE_ENV: development
+      database__client: sqlite3
+      database__connection__filename: /var/lib/ghost/content/data/ghost.db
+    volumes:
+      - ghost_dev_content:/var/lib/ghost/content
+      - ./theme:/var/lib/ghost/content/themes/otb
+
+volumes:
+  ghost_dev_content:

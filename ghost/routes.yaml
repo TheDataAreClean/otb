@@ -1,0 +1,14 @@
+# Upload in Ghost Admin → Settings → Labs → Routes.
+# Keeps the Eleventy-era URLs: /posts/{category}/{slug}/ and /category/{slug}/.
+# A post's category is its primary (first) tag: median, box, whisker or outlier.
+
+routes:
+
+collections:
+  /:
+    permalink: /posts/{primary_tag}/{slug}/
+    template: index
+
+taxonomies:
+  tag: /category/{slug}/
+  author: /author/{slug}/
