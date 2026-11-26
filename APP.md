@@ -10,9 +10,10 @@ wrangler.jsonc          Worker, D1, R2, cron, custom domain
 src/worker.ts           Worker entry (EmDash handler + scheduled publishing)
 src/live.config.ts      EmDash content loader
 src/layouts/Base.astro  HTML shell: head, nav, footer
-src/pages/              index, category/[slug], posts/[slug], [slug] (pages), rss.xml, 404
+src/pages/              index, category/[slug], posts/[slug], [slug] (pages), style, rss.xml, 404
 src/components/         Badge, FilterNav, PostList, Break, Body
 src/utils/categories.ts The four categories, dividers, date format
+src/utils/tokens.ts     Parses styles.css :root at build time → /style/
 src/styles/styles.css   All styles; tokens in the first :root block
 public/                 Favicon, icons, manifest, images, js/margin-notes.js
 seed/                   base.json + content/*.md → seed.json (first setup only)
@@ -21,7 +22,7 @@ scripts/build-seed.mjs  Builds seed.json
 
 ## URLs
 
-`/` list · `/category/{slug}/` · `/posts/{slug}/` · `/{slug}/` for pages (`/about/`, `/reference/`) · `/rss.xml` · `/sitemap.xml` and `/robots.txt` from EmDash · `/_emdash/admin`.
+`/` list · `/category/{slug}/` · `/posts/{slug}/` · `/{slug}/` for pages (`/about/`, `/reference/`) · `/style/` (design tokens, read from the CSS, noindex, not in the nav) · `/rss.xml` · `/sitemap.xml` and `/robots.txt` from EmDash · `/_emdash/admin`.
 
 ## Categories
 
@@ -41,4 +42,8 @@ HTML blocks are sanitized by EmDash (`div`, `aside`, `class`, `data-*` are allow
 
 ## Dropped in v2.0.0
 
-Eleventy, GitHub Pages, Sveltia CMS, the `/style/` token page, generated OG/icon images, the Atom feed (now RSS 2.0), heading anchors, footnotes.
+Eleventy, GitHub Pages, Sveltia CMS, generated OG/icon images, the Atom feed (now RSS 2.0), heading anchors, footnotes.
+
+## `/style/` token parser
+
+`src/utils/tokens.ts` fails the build on any line in the first `:root` block of `styles.css` that isn't `--name: value; /* note */` or a `/* — Group — */` comment. Tokens appear by name prefix (`--font-`, `--text-`, `--leading-`, `--space-`, `--color-`, `--radius-`, and `--max-width`/`--grid-size`/`--margin-note*`); any other prefix needs adding to `tokens.ts`.

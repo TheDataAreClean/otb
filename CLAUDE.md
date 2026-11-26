@@ -14,7 +14,7 @@ Operating manual for Claude. Architecture: [APP.md](APP.md). Commands: [COMMANDS
 - **`seed/seed.json` is generated** — edit `seed/base.json` or `seed/content/*.md`, then `npm run seed`.
 - **Categories** live in `seed/base.json`, `src/utils/categories.ts` and `src/components/Badge.astro`. Change all together.
 - **Never change `wrangler.jsonc` names** (D1, R2) after the first deploy; that points the site at a new empty database.
-- **Tokens live in the first `:root` block** of `src/styles/styles.css`. Hex values belong there only.
+- **Tokens live in the first `:root` block** of `src/styles/styles.css`. Hex values belong there only. `/style/` parses that block and fails the build on any line that isn't `--name: value; /* note */` or a `/* — Group — */` comment.
 - **Callouts, margin notes** are HTML blocks; the **section break** is the `break` block overridden in `Break.astro`. HTML is sanitized — stick to `div`, `aside`, `class`, `data-*`.
 - **Never commit** `.env`, `.dev.vars`, `data.db` or Cloudflare tokens.
 - The sandboxed build can't reach Google Fonts; a `Noto Sans` font warning there is harmless.

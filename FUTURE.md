@@ -10,7 +10,6 @@ Ideas and backlog. Shipped items live in [CHANGELOG.md](CHANGELOG.md).
 ## NEXT
 
 - Footnotes and heading anchors (not supported by EmDash's blocks).
-- Port the `/style/` token page, or drop it for good.
 - A real `callout` / `marginNote` block type via an EmDash plugin, instead of raw HTML.
 
 ## LATER

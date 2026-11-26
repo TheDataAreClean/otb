@@ -13,7 +13,8 @@ Moves the site from Eleventy on GitHub Pages to EmDash on Cloudflare (Workers, D
 - feat: RSS 2.0 at `/rss.xml`; `/sitemap.xml` and `/robots.txt` from EmDash
 - feat: `wrangler.jsonc`, `DEPLOY.md`, and a GitHub Action that deploys to Cloudflare
 - change: posts live at `/posts/{slug}/` (was `/posts/{category}/{slug}/`); no posts existed yet
-- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, `/style/`, image generation, Atom feed, heading anchors, footnotes
+- feat: `/style/` ported, still read from `styles.css`'s `:root` block at build time
+- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, image generation, Atom feed, heading anchors, footnotes
 
 ---
 
