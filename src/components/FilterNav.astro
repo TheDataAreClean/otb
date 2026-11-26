@@ -1,0 +1,15 @@
+---
+import { categories } from "../utils/categories";
+
+interface Props {
+	active?: string;
+}
+const { active } = Astro.props;
+---
+
+<nav class="filter-nav" aria-label="Filter by category">
+	<a href="/" class={`filter-link${!active ? " filter-link--active" : ""}`}>All</a>
+	{categories.map((c) => (
+		<a href={`/category/${c.slug}/`} class={`filter-link${active === c.slug ? " filter-link--active" : ""}`} title={c.description}>{c.name}</a>
+	))}
+</nav>

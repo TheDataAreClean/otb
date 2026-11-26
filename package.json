@@ -2,12 +2,31 @@
   "name": "outside-the-boxplot",
   "version": "2.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "theme:check": "gscan theme",
-    "theme:zip": "cd theme && zip -r ../theme.zip . -x '*.DS_Store'",
-    "ghost:import": "node scripts/build-ghost-import.js"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "typecheck": "astro check",
+    "seed": "node scripts/build-seed.mjs"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.1",
+    "@astrojs/react": "^7.0.0",
+    "@emdash-cms/cloudflare": "^1.5.0",
+    "astro": "^7.3.2",
+    "emdash": "^1.5.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "gscan": "^5.0.0"
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "marked": "^18.3.0",
+    "wrangler": "^4.125.0"
+  },
+  "emdash": {
+    "seed": "seed/seed.json"
   }
 }

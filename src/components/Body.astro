@@ -1,0 +1,16 @@
+---
+// Rendered Portable Text. Callouts and margin notes are `htmlBlock`s (see
+// /reference/); section breaks are `break` blocks, drawn by Break.astro.
+import { PortableText, emdashComponents, mergeComponents } from "emdash/ui";
+import Break from "./Break.astro";
+
+interface Props {
+	value: any;
+}
+const { value } = Astro.props;
+const components = mergeComponents(emdashComponents, { type: { break: Break } });
+---
+
+<div class="post__body">
+	<PortableText value={value} components={components} />
+</div>

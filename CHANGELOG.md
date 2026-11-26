@@ -6,13 +6,14 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
-Moves the site from Eleventy on GitHub Pages to self-hosted Ghost.
+Moves the site from Eleventy on GitHub Pages to EmDash on Cloudflare (Workers, D1, R2).
 
-- feat: Ghost theme `theme/` — same design, ported to Handlebars; categories are Ghost tags, URLs unchanged
-- feat: `docker-compose.yml` (Ghost, MySQL, Caddy), `docker-compose.dev.yml`, `HOSTING.md`
-- feat: `ghost/` — routes, redirects, About and Reference content, import builder
-- feat: deploy workflow validates the theme with gscan and deploys it via the Ghost Admin API
-- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, `/style/`, image generation
+- feat: Astro/EmDash site with the same design: home list and category filter, post and page templates, category badges, hand-drawn dividers and section break, callouts and margin notes
+- feat: seed with the Posts and Pages collections, four categories, menu, and the About and Reference pages
+- feat: RSS 2.0 at `/rss.xml`; `/sitemap.xml` and `/robots.txt` from EmDash
+- feat: `wrangler.jsonc`, `DEPLOY.md`, and a GitHub Action that deploys to Cloudflare
+- change: posts live at `/posts/{slug}/` (was `/posts/{category}/{slug}/`); no posts existed yet
+- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, `/style/`, image generation, Atom feed, heading anchors, footnotes
 
 ---
 

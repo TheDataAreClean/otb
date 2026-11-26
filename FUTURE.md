@@ -4,13 +4,15 @@ Ideas and backlog. Shipped items live in [CHANGELOG.md](CHANGELOG.md).
 
 ## NOW
 
-- Test the theme in a real Ghost instance (Docker was unavailable when it was written; only gscan has run) and fix any rendering gaps.
+- First deploy and a pass through the admin: write a real post per category and check the editor's HTML block, Divider and image blocks.
+- Add an OG image (the generated one was dropped).
 
 ## NEXT
 
-- Newsletter: Ghost has built-in memberships and email; enable if wanted.
+- Footnotes and heading anchors (not supported by EmDash's blocks).
 - Port the `/style/` token page, or drop it for good.
+- A real `callout` / `marginNote` block type via an EmDash plugin, instead of raw HTML.
 
 ## LATER
 
-- Dark mode · Reading time
+- Dark mode · Reading time · Newsletter

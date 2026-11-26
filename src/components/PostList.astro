@@ -1,0 +1,36 @@
+---
+import Badge from "./Badge.astro";
+import { DIVIDERS, formatDate } from "../utils/categories";
+
+interface Props {
+	posts: any[];
+}
+const { posts } = Astro.props;
+const categoryOf = (post: any) => post.data.terms?.category?.[0];
+---
+
+<ol class="post-list">
+	{posts.map((post, i) => {
+		const cat = categoryOf(post);
+		return (
+			<li class="post-list__item">
+				<a href={`/posts/${post.id}/`} class="post-list__link">
+					<span class="post-list__title" {...post.edit.title}>{post.data.title}</span>
+				</a>
+				<div class="post-list__meta">
+					{cat && <Badge slug={cat.slug} label={cat.label} />}
+					{post.data.publishedAt && (
+						<time datetime={post.data.publishedAt.toISOString().split("T")[0]}>{formatDate(post.data.publishedAt)}</time>
+					)}
+				</div>
+				{post.data.excerpt && <p class="post-list__excerpt">{post.data.excerpt}</p>}
+				{i < posts.length - 1 && (
+					<svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true">
+						<path d={DIVIDERS[i % DIVIDERS.length]} fill="none" stroke-width="1.2" stroke-linecap="round" />
+					</svg>
+				)}
+			</li>
+		);
+	})}
+	{posts.length === 0 && <li class="post-list__empty">No posts here yet.</li>}
+</ol>

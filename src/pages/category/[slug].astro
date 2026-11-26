@@ -1,0 +1,26 @@
+---
+import { getEmDashCollection, decodeSlug } from "emdash";
+import Base from "../../layouts/Base.astro";
+import FilterNav from "../../components/FilterNav.astro";
+import PostList from "../../components/PostList.astro";
+import { categoryBySlug } from "../../utils/categories";
+
+const slug = decodeSlug(Astro.params.slug);
+const category = slug ? categoryBySlug[slug] : null;
+if (!category) return Astro.rewrite("/404");
+
+const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
+	where: { category: category.slug },
+	orderBy: { published_at: "desc" },
+	limit: 100,
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+
+<Base title={category.name} description={category.description}>
+	<section class="home">
+		<FilterNav active={category.slug} />
+		<p class="category-heading">{category.name}</p>
+		<PostList posts={posts} />
+	</section>
+</Base>

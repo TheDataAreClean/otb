@@ -1,9 +1,0 @@
-{{!-- The four categories are Ghost tags. Slugs, names and order are fixed here
-      and in routes.yaml; descriptions come from the categories table in APP.md. --}}
-<nav class="filter-nav" aria-label="Filter by category">
-  <a href="{{@site.url}}/" class="filter-link{{#match active "all"}} filter-link--active{{/match}}">All</a>
-  <a href="{{@site.url}}/category/median/" class="filter-link{{#match active "median"}} filter-link--active{{/match}}" title="Finished, definitive essays — the central argument">Median</a>
-  <a href="{{@site.url}}/category/box/" class="filter-link{{#match active "box"}} filter-link--active{{/match}}" title="Dense, substantial analysis — the main body">Box</a>
-  <a href="{{@site.url}}/category/whisker/" class="filter-link{{#match active "whisker"}} filter-link--active{{/match}}" title="Recommendations and links — reaching outward">Whisker</a>
-  <a href="{{@site.url}}/category/outlier/" class="filter-link{{#match active "outlier"}} filter-link--active{{/match}}" title="Rough ideas and seeds — outside the expected range">Outlier</a>
-</nav>

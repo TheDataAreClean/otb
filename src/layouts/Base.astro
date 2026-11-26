@@ -1,0 +1,99 @@
+---
+import { getMenuWithCacheHint, getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import logo from "../../public/images/logo.svg?raw";
+import "../styles/styles.css";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	noindex?: boolean;
+	margins?: boolean;
+	/** Content reference, for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, pageTitle, description, image, canonical, noindex, margins, content } = Astro.props;
+const [settingsResult, menuResult] = await Promise.all([
+	getSiteSettingsWithCacheHint(),
+	getMenuWithCacheHint("primary"),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(settingsResult.cacheHint);
+	Astro.cache.set(menuResult.cacheHint);
+}
+const siteTitle = settingsResult.data?.title ?? "Outside the Boxplot";
+const siteTagline = settingsResult.data?.tagline ?? "";
+const fullTitle = title === siteTitle || title.endsWith(` — ${siteTitle}`) ? title : `${title} — ${siteTitle}`;
+const menu = menuResult.data;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description: description ?? siteTagline,
+	canonical,
+	image,
+	content,
+	siteName: siteTitle,
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		<meta name="theme-color" content="#4a7c59" />
+		{noindex && <meta name="robots" content="noindex" />}
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
+		<link rel="alternate" type="application/rss+xml" title={siteTitle} href="/rss.xml" />
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+
+		<header class="site-header">
+			<nav class="nav" aria-label="Site navigation">
+				<a href="/" class="nav__title" aria-label={`${siteTitle} — home`}>
+					<span class="nav__glyph" aria-hidden="true" set:html={logo} />
+				</a>
+				<div class="nav__links">
+					{menu?.items.map((item) => (
+						<a href={item.url} class="nav__link" target={item.target} rel={item.target === "_blank" ? "noopener noreferrer" : undefined}>{item.label}</a>
+					))}
+				</div>
+			</nav>
+			<svg class="divider" viewBox="0 0 680 10" preserveAspectRatio="none" aria-hidden="true">
+				<path d="M 0,5 C 100,2 220,8 380,4 C 520,1 610,7 680,5" fill="none" stroke-width="1.5" stroke-linecap="round" />
+			</svg>
+		</header>
+
+		<main class="main" id="main-content">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<svg class="divider" viewBox="0 0 680 10" preserveAspectRatio="none" aria-hidden="true">
+				<path d="M 0,5 C 80,8 180,2 320,6 C 460,3 580,7 680,4" fill="none" stroke-width="1.5" stroke-linecap="round" />
+			</svg>
+			<p>© {siteTitle}</p>
+		</footer>
+
+		{margins && <script is:inline src="/js/margin-notes.js" defer></script>}
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>

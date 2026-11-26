@@ -1,5 +1,0 @@
-# Upload in Ghost Admin → Settings → Labs → Redirects.
-# Old Eleventy paths that Ghost serves elsewhere.
-
-301:
-  /feed.xml: /rss/

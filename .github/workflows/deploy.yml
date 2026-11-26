@@ -1,35 +1,31 @@
-name: Deploy theme to Ghost
+name: Deploy to Cloudflare
 
 on:
   push:
     branches: [main]
-    paths: ['theme/**', '.github/workflows/deploy.yml']
-  pull_request:
-    paths: ['theme/**']
   workflow_dispatch:
 
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 jobs:
-  validate:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --no-package-lock
-      - run: npm run theme:check
-
-  deploy:
-    needs: validate
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      # Needs repo secrets GHOST_ADMIN_API_URL (https://otb.thedataareclean.com)
-      # and GHOST_ADMIN_API_KEY (Ghost Admin → Settings → Integrations → custom).
-      - uses: TryGhost/action-deploy-theme@v1
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+        env:
+          SITE_URL: https://otb.thedataareclean.com
+      # Needs repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+      # The first deploy creates the D1 database and R2 bucket named in wrangler.jsonc.
+      - uses: cloudflare/wrangler-action@v3
         with:
-          api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
-          api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
-          theme-name: otb
-          working-directory: theme
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
