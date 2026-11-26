@@ -1,0 +1,16 @@
+---
+// Replaces EmDash's `break` block: the hand-drawn section break. The path varies
+// by the block's key so it is stable per break.
+import { DIVIDERS } from "../utils/categories";
+
+interface Props {
+	node: { _key: string };
+}
+const { node } = Astro.props;
+let h = 0;
+for (const ch of node?._key ?? "") h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+---
+
+<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator">
+	<path d={DIVIDERS[h % DIVIDERS.length]} fill="none" stroke-width="1.5" stroke-linecap="round" />
+</svg>

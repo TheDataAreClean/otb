@@ -1,0 +1,63 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Outside the Boxplot",
+		"description": "Posts, pages and the four box-plot categories",
+		"author": "Outside the Boxplot"
+	},
+	"settings": {
+		"title": "Outside the Boxplot",
+		"tagline": "A digital garden for data communicators — thoughts on data communication, information design, and related topics."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Posts",
+			"labelSingular": "Post",
+			"urlPattern": "/posts/{slug}",
+			"supports": ["drafts", "revisions", "preview", "search", "seo"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "excerpt", "label": "Excerpt", "type": "text" },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true }
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"urlPattern": "/{slug}",
+			"supports": ["drafts", "revisions", "preview", "search", "seo"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true }
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "category",
+			"label": "Categories",
+			"labelSingular": "Category",
+			"hierarchical": false,
+			"collections": ["posts"],
+			"terms": [
+				{ "slug": "median", "label": "Median", "description": "Finished, definitive essays — the central argument" },
+				{ "slug": "box", "label": "Box", "description": "Dense, substantial analysis — the main body" },
+				{ "slug": "whisker", "label": "Whisker", "description": "Recommendations and links — reaching outward" },
+				{ "slug": "outlier", "label": "Outlier", "description": "Rough ideas and seeds — outside the expected range" }
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{ "type": "custom", "label": "About", "url": "/about/" },
+				{ "type": "custom", "label": "RSS", "url": "/rss.xml" }
+			]
+		}
+	]
+}

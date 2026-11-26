@@ -6,6 +6,16 @@ Version bump policy: MAJOR = complete visual redesign or change in site concept;
 
 ## UNRELEASED
 
+Moves the site from Eleventy on GitHub Pages to EmDash on Cloudflare (Workers, D1, R2).
+
+- feat: Astro/EmDash site with the same design: home list and category filter, post and page templates, category badges, hand-drawn dividers and section break, callouts and margin notes
+- feat: seed with the Posts and Pages collections, four categories, menu, and the About and Reference pages
+- feat: RSS 2.0 at `/rss.xml`; `/sitemap.xml` and `/robots.txt` from EmDash
+- feat: `wrangler.jsonc`, `DEPLOY.md`, and a GitHub Action that deploys to Cloudflare
+- change: posts live at `/posts/{slug}/` (was `/posts/{category}/{slug}/`); no posts existed yet
+- feat: `/style/` ported, still read from `styles.css`'s `:root` block at build time
+- remove: Eleventy, GitHub Pages deploy, Sveltia CMS, image generation, Atom feed, heading anchors, footnotes
+
 ---
 
 ## 2026-09-20 (v1.3.0)

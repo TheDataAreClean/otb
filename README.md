@@ -1,49 +1,10 @@
 # Outside the Boxplot
 
-Digital garden at [otb.thedataareclean.com](https://otb.thedataareclean.com). Writing about data communication and information design — how to make numbers legible to people who need to act on them.
+A digital garden for thinking out loud about data communication. [EmDash](https://github.com/emdash-cms/emdash) (an Astro CMS) running on Cloudflare Workers, with D1 for content and R2 for media.
 
-Post types are named after box plot elements: Median (finished essays), Box (dense analysis), Whisker (recommendations), Outlier (rough ideas).
+- `src/` — Astro pages, layouts and components. `src/styles/styles.css` is the whole stylesheet.
+- `seed/` — the content model and starter pages EmDash loads on first setup.
+- `wrangler.jsonc` — Cloudflare bindings (D1, R2, cron, custom domain).
+- [DEPLOY.md](DEPLOY.md) setup · [APP.md](APP.md) architecture · [COMMANDS.md](COMMANDS.md) commands · [CLAUDE.md](CLAUDE.md) working rules.
 
----
-
-## Quickstart
-
-```sh
-npm install
-npm start      # dev server → http://localhost:8080
-```
-
-Full command reference: [COMMANDS.md](COMMANDS.md)
-
----
-
-## Top-level layout
-
-```
-src/              Content, templates, CSS, and static assets
-  posts/          Markdown posts (one file = one post)
-  _includes/      Nunjucks layouts and partials
-  _data/          Global data — posts.js, categories.js, metadata.js, tokens.js
-  css/            Single stylesheet (styles.css)
-  js/             margin-notes.js — highlights a margin note's phrase
-  admin/          Sveltia CMS entry point + config.yml
-  reference.md    /reference/ — every markdown element (internal, noindex)
-  style.njk       /style/ — design tokens and components (internal, noindex)
-  images/         CMS-uploaded images
-.eleventy.js      Eleventy config — filters, passthrough copies
-.github/          Deploy workflow (GitHub Actions → GitHub Pages)
-scripts/          Build-time image generation
-```
-
----
-
-## Docs
-
-| File | Purpose |
-|---|---|
-| [README.md](README.md) | This file — what it is and how to start |
-| [APP.md](APP.md) | Architecture and technical reference |
-| [COMMANDS.md](COMMANDS.md) | All commands, copy-paste ready |
-| [CHANGELOG.md](CHANGELOG.md) | Version history |
-| [FUTURE.md](FUTURE.md) | Ideas backlog |
-| [CLAUDE.md](CLAUDE.md) | Working instructions for Claude |
+Posts are written in the admin at `/_emdash/admin`, not in git. Before v2.0.0 this was an Eleventy site on GitHub Pages; see [CHANGELOG.md](CHANGELOG.md).

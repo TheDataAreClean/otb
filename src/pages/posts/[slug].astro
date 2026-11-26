@@ -1,0 +1,78 @@
+---
+import { getEmDashEntry, getEmDashCollection, getSeoMeta, decodeSlug, getSiteSettings } from "emdash";
+import Base from "../../layouts/Base.astro";
+import Body from "../../components/Body.astro";
+import Badge from "../../components/Badge.astro";
+import { categoryBySlug, formatDate } from "../../utils/categories";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.rewrite("/404");
+
+const { entry: post, cacheHint } = await getEmDashEntry("posts", slug);
+if (!post) return Astro.rewrite("/404");
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const settings = await getSiteSettings();
+const seo = getSeoMeta(post, {
+	siteTitle: settings?.title ?? "Outside the Boxplot",
+	siteUrl: Astro.url.origin,
+	path: Astro.url.pathname.replace(/\/$/, ""),
+});
+
+const category = post.data.terms?.category?.[0];
+const browse = category ? categoryBySlug[category.slug]?.browse ?? `More ${category.label} posts` : "";
+
+// Newer / older neighbours, by published date
+const { entries: all } = await getEmDashCollection("posts", { orderBy: { published_at: "desc" }, limit: 500 });
+const i = all.findIndex((p) => p.id === post.id);
+const newer = i > 0 ? all[i - 1] : null;
+const older = i >= 0 ? all[i + 1] ?? null : null;
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description}
+	canonical={seo.canonical}
+	image={seo.ogImage}
+	margins
+	content={{ collection: "posts", id: post.data.id, slug }}
+>
+	<article class="post">
+		<header class="post__header">
+			<div class="post__meta">
+				{category && <Badge slug={category.slug} label={category.label} />}
+				{post.data.publishedAt && (
+					<time datetime={post.data.publishedAt.toISOString().split("T")[0]}>{formatDate(post.data.publishedAt)}</time>
+				)}
+			</div>
+			<h1 class="post__title" {...post.edit.title}>{post.data.title}</h1>
+		</header>
+
+		<Body value={post.data.content} />
+
+		<footer class="post__footer">
+			<nav class="post-nav" aria-label="More posts">
+				{newer ? (
+					<a href={`/posts/${newer.id}/`} class="post-nav__link">
+						<span class="post-nav__dir">← Newer</span>
+						<span class="post-nav__title">{newer.data.title}</span>
+					</a>
+				) : <div />}
+				{older ? (
+					<a href={`/posts/${older.id}/`} class="post-nav__link post-nav__link--right">
+						<span class="post-nav__dir">Older →</span>
+						<span class="post-nav__title">{older.data.title}</span>
+					</a>
+				) : <div />}
+			</nav>
+
+			{category && (
+				<div class="category-more">
+					<Badge slug={category.slug} label={category.label} />
+					<a href={`/category/${category.slug}/`} class="category-more__link">{browse} →</a>
+				</div>
+			)}
+		</footer>
+	</article>
+</Base>

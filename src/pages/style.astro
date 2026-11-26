@@ -1,0 +1,129 @@
+---
+import Base from "../layouts/Base.astro";
+import Badge from "../components/Badge.astro";
+import { tokens } from "../utils/tokens";
+import { categories, DIVIDERS } from "../utils/categories";
+
+const slugify = (s: string) => s.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+---
+
+<Base title="Style" noindex margins description="The design tokens and components this site is built from, read from styles.css when the site is built.">
+	<article class="page">
+		<h1 class="page__title">Style</h1>
+
+		<div class="post__body">
+			<p>This page is a reference for how the site looks. Every value below is read from the <code>:root</code> block of <code>src/styles/styles.css</code> at build time, so it cannot drift from the real thing. The formatting of the writing itself is on the <a href="/reference/">reference</a> page.</p>
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[0]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="fonts"><a class="header-anchor" href="#fonts">Fonts</a></h2>
+			<p>IBM Plex Serif is the writing. IBM Plex Sans is the interface: navigation, meta lines, badges and labels.</p>
+			{tokens.fonts.map((t) => (
+				<div class="token-row">
+					<p class="token-row__head"><code>{t.name}</code><span>{t.value}{t.note && ` · ${t.note}`}</span></p>
+					<p class="token-row__specimen" style={`font-family: var(${t.name});`}>The quick brown fox jumps over the lazy dog. 0123456789</p>
+				</div>
+			))}
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[1]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="type-scale"><a class="header-anchor" href="#type-scale">Type scale</a></h2>
+			<p>Seven sizes, on a 17px root that drops to 16px on screens 720px wide or less.</p>
+			{tokens.text.map((t) => (
+				<div class="token-row">
+					<p class="token-row__head"><code>{t.name}</code><span>{t.value}{t.note && ` · ${t.note}`}</span></p>
+					<p class="token-row__specimen" style={`font-size: var(${t.name});`}>Every word here is set at this size.</p>
+				</div>
+			))}
+
+			<h3 id="line-heights"><a class="header-anchor" href="#line-heights">Line heights</a></h3>
+			{tokens.leading.map((t) => (
+				<div class="token-row">
+					<p class="token-row__head"><code>{t.name}</code><span>{t.value}{t.note && ` · ${t.note}`}</span></p>
+				</div>
+			))}
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[2]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="colors"><a class="header-anchor" href="#colors">Colors</a></h2>
+			<p>Hex values live in <code>styles.css</code>'s <code>:root</code> block only. Everywhere else uses the token.</p>
+			{tokens.colorGroups.map((g) => (
+				<>
+					<h3 id={`color-${slugify(g.title)}`}><a class="header-anchor" href={`#color-${slugify(g.title)}`}>{g.title}</a></h3>
+					<div class="swatch-grid">
+						{g.tokens.map((t) => (
+							<div class="swatch">
+								<span class="swatch__chip" style={`background: var(${t.name});`}></span>
+								<code>{t.name}</code>
+								<span class="swatch__value">{t.value}</span>
+								{t.note && <span class="swatch__note">{t.note}</span>}
+							</div>
+						))}
+					</div>
+				</>
+			))}
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[3]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="spacing"><a class="header-anchor" href="#spacing">Spacing</a></h2>
+			<p>A scale built on 4px units, in rem so it follows the root size.</p>
+			<div class="space-list">
+				{tokens.space.map((s) => (
+					<div class="space-row">
+						<code>{s.name}</code>
+						<span class="space-row__value">{s.value}</span>
+						<i class="space-row__bar" style={`width: var(${s.name});`}></i>
+					</div>
+				))}
+			</div>
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[4]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="shape-and-layout"><a class="header-anchor" href="#shape-and-layout">Shape and layout</a></h2>
+			<p>The reading column is <code>--max-width</code> wide. Margin notes sit in the gutter beside it from 1100px up, and inline below that; the gutter is the note width plus the gap. The page background is a graph-paper grid drawn at <code>--grid-size</code>.</p>
+			<div class="space-list">
+				{[...tokens.shape, ...tokens.layout].map((d) => (
+					<div class="space-row">
+						<code>{d.name}</code>
+						<span class="space-row__value">{d.value}</span>
+						<span class="space-row__note">{d.note}</span>
+					</div>
+				))}
+			</div>
+
+			<svg class="section-break" viewBox="0 0 680 8" preserveAspectRatio="none" role="separator"><path d={DIVIDERS[0]} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+
+			<h2 id="components"><a class="header-anchor" href="#components">Components</a></h2>
+
+			<h3 id="category-badges"><a class="header-anchor" href="#category-badges">Category badges</a></h3>
+			<p>One badge per category, from <code>src/utils/categories.ts</code>. The icon is a tiny box plot of the same name.</p>
+			<div class="badge-list">
+				{categories.map((c) => (
+					<p><Badge slug={c.slug} label={c.name} /> {c.description}</p>
+				))}
+			</div>
+
+			<h3 id="hand-drawn-dividers"><a class="header-anchor" href="#hand-drawn-dividers">Hand-drawn dividers and section break</a></h3>
+			<p>Between posts in a list, cycling through five path variants. The same five are the section break in writing (the Divider block), and every rule on this page.</p>
+			<div class="divider-list">
+				{DIVIDERS.map((d) => (
+					<svg class="post-list__divider" viewBox="0 0 680 8" preserveAspectRatio="none" aria-hidden="true"><path d={d} fill="none" stroke-width="1.5" stroke-linecap="round" /></svg>
+				))}
+			</div>
+
+			<h3 id="margin-note"><a class="header-anchor" href="#margin-note">Margin note</a></h3>
+			<aside class="margin-note" data-anchor="the words it is about"><p>On a wide screen this sits in the margin beside the paragraph. Below 1100px it becomes a tinted box in the flow of the text.</p></aside>
+			<p>A margin note is attached to the words it is about, so only those words are highlighted. Hover the highlight, or the note, and each lights up the other. Leave the phrase out and the note simply sits beside the paragraph that follows.</p>
+			<p>In the editor it is an HTML block, put directly before the paragraph it belongs to:</p>
+			<pre><code>&lt;aside class="margin-note" data-anchor="the words it is about"&gt;&lt;p&gt;The note.&lt;/p&gt;&lt;/aside&gt;</code></pre>
+			<p>If the phrase is not found in that paragraph, the note is left as it is and the script warns in the console.</p>
+
+			<h3 id="callouts"><a class="header-anchor" href="#callouts">Callouts</a></h3>
+			<div class="callout callout--note"><p>A note callout: an aside or clarification, on a faint yellow.</p></div>
+			<div class="callout callout--warning"><p>A warning callout: a caveat or a known failure mode, on a faint orange.</p></div>
+
+			<h3 id="highlight-and-links"><a class="header-anchor" href="#highlight-and-links">Highlight and links</a></h3>
+			<p>A <mark>highlighted phrase</mark> and an <a href="https://www.example.com/">external link</a>.</p>
+		</div>
+	</article>
+</Base>

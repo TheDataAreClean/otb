@@ -1,0 +1,162 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Outside the Boxplot",
+		"description": "Posts, pages and the four box-plot categories",
+		"author": "Outside the Boxplot"
+	},
+	"settings": {
+		"title": "Outside the Boxplot",
+		"tagline": "A digital garden for data communicators — thoughts on data communication, information design, and related topics."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Posts",
+			"labelSingular": "Post",
+			"urlPattern": "/posts/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"urlPattern": "/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "category",
+			"label": "Categories",
+			"labelSingular": "Category",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "median",
+					"label": "Median",
+					"description": "Finished, definitive essays — the central argument"
+				},
+				{
+					"slug": "box",
+					"label": "Box",
+					"description": "Dense, substantial analysis — the main body"
+				},
+				{
+					"slug": "whisker",
+					"label": "Whisker",
+					"description": "Recommendations and links — reaching outward"
+				},
+				{
+					"slug": "outlier",
+					"label": "Outlier",
+					"description": "Rough ideas and seeds — outside the expected range"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/about/"
+				},
+				{
+					"type": "custom",
+					"label": "RSS",
+					"url": "/rss.xml"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "htmlBlock",
+							"_key": "about-html",
+							"html": "<p><em>Outside the Boxplot</em> is a digital garden for thinking out loud about data communication.</p>\n<p>I work at the intersection of data and storytelling — helping people understand what numbers mean, why it matters, and how to make that meaning legible to others. That means a lot of time thinking about charts, words, structure, and the gap between insight and communication.</p>\n<p>This site is where I work through those thoughts. The categories signal what kind of thinking each post represents:</p>\n<figure class=\"anatomy-figure\" aria-label=\"Box plot anatomy showing the four post types\"><img src=\"/images/anatomy-figure.svg\" alt=\"Box plot diagram labelling the four post categories: Median (finished essays), Box (dense analysis), Whisker (recommendations), and Outlier (rough ideas)\" width=\"520\" height=\"230\"></figure><p>No comments, no analytics I&#39;ll ever check, no strategy. Just a place to think.</p>\n"
+						}
+					]
+				}
+			},
+			{
+				"id": "reference",
+				"slug": "reference",
+				"status": "published",
+				"data": {
+					"title": "Reference",
+					"content": [
+						{
+							"_type": "htmlBlock",
+							"_key": "reference-html",
+							"html": "<p>This document exists to show every formatting element this site can render. The page itself is one HTML block; in the editor, the same elements are the toolbar and slash-menu blocks, with callouts, margin notes and the section break noted below. It is a reference and a test. The content is real where it can be; instrumental where it must be.</p>\n<h2>Inline text</h2>\n<p>Running prose can include <strong>bold text</strong> for emphasis, <em>italic text</em> for titles and stress, and <del>strikethrough</del> for corrections or retractions. These can combine: <strong><em>bold italic</em></strong> works, as does <em><del>struck italic</del></em>.</p>\n<p>Inline <code>code</code> renders in a monospace font with a faint background. It is for short technical terms, variable names, filenames — things that need to be distinguished from prose.</p>\n<p>Links come in two kinds. <a href=\"https://www.example.com/\">External links</a> point away from this site. <a href=\"/about/\">Internal links</a> navigate within it. Both are underlined and use the accent green, darkening on hover.</p>\n<p>Typographic characters are written as typed: use “curly quotes”, it’s, an en dash – or an em dash —, and an ellipsis… directly. Nothing converts straight quotes or double hyphens for you.</p>\n<hr>\n<h2>Headings</h2>\n<p>Headings step down from h2 to h4, each a little smaller and staying close to body size and weight. Structure is in the spacing and in the words themselves as much as in visual hierarchy. This is a deliberate choice.</p>\n<h3>Third-level heading</h3>\n<p>A third-level heading, introduced by <code>###</code>. Used for subsections within a section.</p>\n<h4>Fourth-level heading</h4>\n<p>A fourth-level heading, <code>####</code>. Use sparingly — if you need four levels of hierarchy in a single document, the document may need restructuring.</p>\n<hr>\n<h2>Lists</h2>\n<p>An unordered list:</p>\n<ul>\n<li>The first item, which establishes the pattern</li>\n<li>A second item, continuing it</li>\n<li>A third item, closing the set<ul>\n<li>A nested item, indented one level</li>\n<li>Another nested item at the same level<ul>\n<li>Nested two levels deep, which is usually too deep</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<p>An ordered list:</p>\n<ol>\n<li>The first step, which must come first</li>\n<li>The second step, which follows from it</li>\n<li>The third step, which completes the sequence<ol>\n<li>A sub-step within the third step</li>\n<li>Another sub-step</li>\n</ol>\n</li>\n</ol>\n<p>A list where items are full sentences should end each sentence with a full stop. A list where items are fragments should not. Mixing the two in a single list is the most common list error.</p>\n<hr>\n<h2>Blockquote</h2>\n<p>A blockquote is for quotation — text that originates elsewhere. It is indented, in italic, with a faint left border. The source, if needed, follows as a regular paragraph.</p>\n<blockquote>\n<p>The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function.</p>\n</blockquote>\n<p>F. Scott Fitzgerald, <em>The Crack-Up</em>, 1936.</p>\n<hr>\n<h2>Code block</h2>\n<p>A fenced code block, with syntax annotation:</p>\n<pre><code class=\"language-json\">{\n  &quot;title&quot;: &quot;A complete formatting reference&quot;,\n  &quot;date&quot;: &quot;2026-03-26&quot;,\n  &quot;tags&quot;: [&quot;meta&quot;, &quot;design&quot;]\n}\n</code></pre>\n<p>A shell example:</p>\n<pre><code class=\"language-bash\">npm start\n# → Server at http://localhost:8080\n</code></pre>\n<p>Code blocks scroll horizontally if the content is wider than the page. They do not wrap.</p>\n<hr>\n<h2>Table</h2>\n<p>Tables use the standard pipe syntax. Column alignment is set with colons in the separator row.</p>\n<table>\n<thead>\n<tr>\n<th>Element</th>\n<th>Markdown</th>\n<th>Renders as</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Bold</td>\n<td><code>**text**</code></td>\n<td><strong>text</strong></td>\n</tr>\n<tr>\n<td>Italic</td>\n<td><code>*text*</code></td>\n<td><em>text</em></td>\n</tr>\n<tr>\n<td>Strikethrough</td>\n<td><code>~~text~~</code></td>\n<td><del>text</del></td>\n</tr>\n<tr>\n<td>Inline code</td>\n<td><code>code</code></td>\n<td><code>code</code></td>\n</tr>\n<tr>\n<td>Horizontal rule</td>\n<td><code>---</code></td>\n<td>a hand-drawn line</td>\n</tr>\n</tbody></table>\n<p>Tables should be used for genuinely tabular data. If you find yourself merging cells or nesting tables, a list or prose is probably the right tool.</p>\n<hr>\n<h2>Section break</h2>\n<p>The hand-drawn line between each section of this page is a section break. It is for a change of subject or a pause in the writing, lighter than a heading. In the editor, insert a <strong>Divider</strong> block (line style); in an HTML block, a bare <code>&lt;hr&gt;</code> draws one.</p>\n<p>***` on a line of its own draws one.</p>\n<p>Each one is a slightly different stroke, taken from the same five that separate posts in a list.</p>\n<hr>\n<h2>Image</h2>\n<p>An image, constrained to the document width:</p>\n<p><img src=\"/images/formatting-reference.svg\" alt=\"sample.svg\"></p>\n<p>Images are block-level. They sit on their own line with vertical spacing above and below. They do not float. In the editor, an image block has a caption field.</p>\n<hr>\n<h2>Callout</h2>\n<p>A callout is an <strong>HTML block</strong> wrapping a <code>div</code> with the class <code>callout callout--note</code> or <code>callout callout--warning</code>.</p>\n<div class=\"callout callout--note\"><p>A note callout. Use this for asides, clarifications, or additional context that is useful but not essential to the main argument. It has a faint yellow background.</p></div><div class=\"callout callout--warning\"><p>A warning callout. Use this for things the reader should be careful about — exceptions, caveats, known failure modes. It has a faint orange background.</p></div><hr>\n<h2>Margin note</h2>\n<p>A margin note is an <strong>HTML block</strong> holding an <code>aside</code> with the class <code>margin-note</code>, placed directly above the paragraph it belongs to. Add <code>data-anchor=&quot;phrase&quot;</code> to highlight that phrase in the paragraph.</p>\n<aside class=\"margin-note\" data-anchor=\"the words it is about\"><p>This one names its phrase, so only those words are highlighted.</p></aside><p>A margin note sits in the margin beside the paragraph it belongs to, with the words it is about highlighted. On a narrow screen the same note becomes a tinted box in the flow of the text, just above that paragraph. Without JavaScript the highlight is missing, but the note is still there.</p>\n<aside class=\"margin-note\"><p>This one names no phrase, so it sits beside the whole paragraph that follows.</p></aside><p>The paragraph that hosts a margin note should be self-contained — readable without the note. The note adds, it does not complete.</p>\n"
+						}
+					]
+				}
+			}
+		],
+		"posts": []
+	}
+}
